@@ -789,12 +789,12 @@
             explosionDeConfeti();
 
             portada.classList.add('abriendo');
+            iniciarAudio();
 
             setTimeout(() => {
                 portada.classList.add('oculto');
                 carta.classList.add('visible');
                 carta.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                iniciarAudio();
             }, 500);
         }
 
@@ -817,7 +817,7 @@
         const subTexto = reproductor.querySelector('.reproductor-sub');
         let audioActivo = false;
         let ytPlayer = null;
-        const esMovil = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+        let intentosAudio = 0;
 
         const tag = document.createElement('script');
         tag.src = 'https://www.youtube.com/iframe_api';
@@ -835,49 +835,33 @@
                     playsinline: 1
                 },
                 events: {
-                    onReady: function (e) { e.target.setVolume(100); }
+                    onReady: function (e) {
+                        e.target.setVolume(100);
+                        if (audioPendiente) iniciarAudio();
+                    }
                 }
             });
         }
 
-        let intentosAudio = 0;
+        let audioPendiente = false;
 
         function iniciarAudio() {
+            audioPendiente = true;
             if (ytPlayer && ytPlayer.playVideo) {
+                audioPendiente = false;
                 intentosAudio = 0;
-                if (esMovil) {
-                    ytPlayer.mute();
-                    ytPlayer.playVideo();
-                    audioActivo = false;
-                    subTexto.innerHTML = 'Toca de nuevo para escuchar &#10084;';
-                    reproductor.classList.add('playing');
-                    btnPlay.innerHTML = '&#128266;';
-                    btnPlay.classList.add('bocina');
-                } else {
-                    ytPlayer.unMute();
-                    ytPlayer.playVideo();
-                    audioActivo = true;
-                    subTexto.innerHTML = 'Nuestra canción';
-                    reproductor.classList.add('playing');
-                    btnPlay.innerHTML = '&#10074;&#10074;';
-                }
-            } else if (intentosAudio < 40) {
-                intentosAudio++;
-                setTimeout(iniciarAudio, 800);
-            } else {
-                subTexto.innerHTML = 'No pude cargar el audio';
-            }
-        }
-
-        function activarSonido() {
-            if (ytPlayer && ytPlayer.unMute) {
-                ytPlayer.unMute();
+                if (ytPlayer.unMute) ytPlayer.unMute();
                 ytPlayer.playVideo();
                 audioActivo = true;
                 subTexto.innerHTML = 'Nuestra canción';
+                reproductor.classList.add('playing');
                 btnPlay.innerHTML = '&#10074;&#10074;';
                 btnPlay.classList.remove('bocina');
-                reproductor.classList.add('playing');
+            } else if (intentosAudio < 50) {
+                intentosAudio++;
+                setTimeout(iniciarAudio, 200);
+            } else {
+                subTexto.innerHTML = 'Toca para escuchar &#10084;';
             }
         }
 
@@ -889,15 +873,11 @@
             reproductor.classList.remove('playing');
             btnPlay.innerHTML = '&#9654;';
             btnPlay.classList.remove('bocina');
-            if (esMovil) {
-                subTexto.innerHTML = 'Toca para escuchar &#10084;';
-            }
+            subTexto.innerHTML = 'Toca para escuchar &#10084;';
         }
 
         function toggleAudio() {
-            if (esMovil && !audioActivo && reproductor.classList.contains('playing')) {
-                activarSonido();
-            } else if (audioActivo) {
+            if (reproductor.classList.contains('playing')) {
                 detenerAudio();
             } else {
                 iniciarAudio();
