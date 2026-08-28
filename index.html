@@ -577,10 +577,8 @@
                                 class="w-[3px] h-2 bg-dorado rounded-[2px]"></span>
                         </div>
                     </div>
-                    <iframe id="ytAudio" class="absolute w-px h-px opacity-0 pointer-events-none"
-                        src="https://www.youtube.com/embed/pux1qp9wZTE?enablejsapi=1&autoplay=1&mute=1&controls=0&showinfo=0&rel=0"
-                        allow="autoplay; encrypted-media" title="audio">
-                    </iframe>
+                    <div id="ytAudio" class="absolute w-px h-px opacity-0 pointer-events-none"
+                        aria-hidden="true"></div>
                 </div>
 
                 <div
@@ -830,11 +828,11 @@
                 videoId: 'pux1qp9wZTE',
                 playerVars: {
                     autoplay: 0,
-                    mute: esMovil ? 1 : 0,
                     controls: 0,
                     showinfo: 0,
                     rel: 0,
-                    modestbranding: 1
+                    modestbranding: 1,
+                    playsinline: 1
                 },
                 events: {
                     onReady: function (e) { e.target.setVolume(100); }
@@ -842,8 +840,11 @@
             });
         }
 
+        let intentosAudio = 0;
+
         function iniciarAudio() {
             if (ytPlayer && ytPlayer.playVideo) {
+                intentosAudio = 0;
                 if (esMovil) {
                     ytPlayer.mute();
                     ytPlayer.playVideo();
@@ -856,11 +857,15 @@
                     ytPlayer.unMute();
                     ytPlayer.playVideo();
                     audioActivo = true;
+                    subTexto.innerHTML = 'Nuestra canción';
                     reproductor.classList.add('playing');
                     btnPlay.innerHTML = '&#10074;&#10074;';
                 }
-            } else {
+            } else if (intentosAudio < 40) {
+                intentosAudio++;
                 setTimeout(iniciarAudio, 800);
+            } else {
+                subTexto.innerHTML = 'No pude cargar el audio';
             }
         }
 
@@ -895,11 +900,7 @@
             } else if (audioActivo) {
                 detenerAudio();
             } else {
-                if (esMovil && reproductor.classList.contains('playing')) {
-                    activarSonido();
-                } else {
-                    iniciarAudio();
-                }
+                iniciarAudio();
             }
         }
         reproductor.addEventListener('click', toggleAudio);
@@ -933,18 +934,6 @@
         if (!prefiereMenosMovimiento && window.Lenis) {
             new Lenis({ autoRaf: true });
         }
-
-        const iframe = document.getElementById('ytAudio');
-
-        function unmuteAudio() {
-            iframe.contentWindow.postMessage(
-                JSON.stringify({ event: 'command', func: 'unMute', args: [] }),
-                '*'
-            );
-            document.removeEventListener('click', unmuteAudio);
-        }
-
-        document.addEventListener('click', unmuteAudio);
 
     </script>
 
