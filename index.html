@@ -502,8 +502,8 @@
     class="relative min-h-dvh w-full overflow-x-hidden flex items-center justify-center font-serif bg-[radial-gradient(circle_at_20%_15%,rgba(184,147,90,0.14),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(74,124,89,0.22),transparent_50%),linear-gradient(160deg,#0f1d14_0%,#1c3325_45%,#0f1d14_100%)]">
 
     <!-- líneas de nivel (topografía, toque de ingeniería ambiental) -->
-    <svg class="fixed inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1000 700" preserveAspectRatio="xMidYMid slice"
-        aria-hidden="true">
+    <svg class="fixed inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1000 700"
+        preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <g fill="none" stroke="#e3c896" stroke-width="1.6" opacity="0.07">
             <path d="M-30 600 C 90 555, 200 595, 300 530 C 400 465, 520 510, 640 460 C 730 425, 820 435, 1030 360" />
             <path d="M-30 632 C 90 587, 200 627, 300 562 C 400 497, 520 542, 640 492 C 730 457, 820 467, 1030 392" />
@@ -587,56 +587,77 @@
             <div class="tarjeta-portada relative z-[2] w-full aspect-[4/5] max-[480px]:aspect-[3/4] short-landscape:aspect-[5/4] bg-linear-to-br from-crema to-crema-2 rounded-[16px] shadow-[0_25px_60px_rgba(0,0,0,0.5),inset_0_0_0_1px_rgba(184,147,90,0.45)] cursor-pointer flex flex-col items-center justify-center text-center px-5 py-6 max-[480px]:px-4 max-[480px]:py-5 transition-all duration-500 ease-[cubic-bezier(.4,1.6,.5,1)] overflow-hidden hover:scale-[1.03] hover:-rotate-[0.5deg] hover:shadow-[0_30px_70px_rgba(0,0,0,0.55),inset_0_0_0_1px_rgba(184,147,90,0.7)] active:scale-[0.97] before:absolute before:inset-2 before:border-[1.5px] before:border-dorado/50 before:rounded-[10px] before:pointer-events-none before:transition-colors hover:before:border-dorado/90"
                 id="tarjetaPortada" role="button" tabindex="0" aria-label="Abrir la carta">
 
-                <div class="esquina tl absolute top-2 left-2 w-[clamp(22px,5vw,36px)] h-[clamp(22px,5vw,36px)] text-dorado opacity-80 z-[1]">
+                <div
+                    class="esquina tl absolute top-2 left-2 w-[clamp(22px,5vw,36px)] h-[clamp(22px,5vw,36px)] text-dorado opacity-80 z-[1]">
                     <svg class="w-full h-full block" viewBox="0 0 60 60">
-                        <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" />
-                        <path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor" opacity=".75" />
-                        <path d="M10 21 C 16 17, 22 17, 27 20 C 22 26, 14 26, 10 21 Z" fill="currentColor" opacity=".45" />
+                        <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.5" fill="none"
+                            stroke-linecap="round" />
+                        <path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor"
+                            opacity=".75" />
+                        <path d="M10 21 C 16 17, 22 17, 27 20 C 22 26, 14 26, 10 21 Z" fill="currentColor"
+                            opacity=".45" />
                         <circle cx="35" cy="9" r="3" fill="currentColor" />
                     </svg>
                 </div>
-                <div class="esquina tr absolute top-2 right-2 w-[clamp(22px,5vw,36px)] h-[clamp(22px,5vw,36px)] text-dorado opacity-80 z-[1] -scale-x-100">
+                <div
+                    class="esquina tr absolute top-2 right-2 w-[clamp(22px,5vw,36px)] h-[clamp(22px,5vw,36px)] text-dorado opacity-80 z-[1] -scale-x-100">
                     <svg class="w-full h-full block" viewBox="0 0 60 60">
-                        <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" />
-                        <path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor" opacity=".75" />
-                        <path d="M10 21 C 16 17, 22 17, 27 20 C 22 26, 14 26, 10 21 Z" fill="currentColor" opacity=".45" />
+                        <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.5" fill="none"
+                            stroke-linecap="round" />
+                        <path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor"
+                            opacity=".75" />
+                        <path d="M10 21 C 16 17, 22 17, 27 20 C 22 26, 14 26, 10 21 Z" fill="currentColor"
+                            opacity=".45" />
                         <circle cx="35" cy="9" r="3" fill="currentColor" />
                     </svg>
                 </div>
-                <div class="esquina bl absolute bottom-2 left-2 w-[clamp(22px,5vw,36px)] h-[clamp(22px,5vw,36px)] text-dorado opacity-80 z-[1] -scale-y-100">
+                <div
+                    class="esquina bl absolute bottom-2 left-2 w-[clamp(22px,5vw,36px)] h-[clamp(22px,5vw,36px)] text-dorado opacity-80 z-[1] -scale-y-100">
                     <svg class="w-full h-full block" viewBox="0 0 60 60">
-                        <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" />
-                        <path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor" opacity=".75" />
-                        <path d="M10 21 C 16 17, 22 17, 27 20 C 22 26, 14 26, 10 21 Z" fill="currentColor" opacity=".45" />
+                        <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.5" fill="none"
+                            stroke-linecap="round" />
+                        <path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor"
+                            opacity=".75" />
+                        <path d="M10 21 C 16 17, 22 17, 27 20 C 22 26, 14 26, 10 21 Z" fill="currentColor"
+                            opacity=".45" />
                         <circle cx="35" cy="9" r="3" fill="currentColor" />
                     </svg>
                 </div>
-                <div class="esquina br absolute bottom-2 right-2 w-[clamp(22px,5vw,36px)] h-[clamp(22px,5vw,36px)] text-dorado opacity-80 z-[1] -scale-x-100 -scale-y-100">
+                <div
+                    class="esquina br absolute bottom-2 right-2 w-[clamp(22px,5vw,36px)] h-[clamp(22px,5vw,36px)] text-dorado opacity-80 z-[1] -scale-x-100 -scale-y-100">
                     <svg class="w-full h-full block" viewBox="0 0 60 60">
-                        <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" />
-                        <path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor" opacity=".75" />
-                        <path d="M10 21 C 16 17, 22 17, 27 20 C 22 26, 14 26, 10 21 Z" fill="currentColor" opacity=".45" />
+                        <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.5" fill="none"
+                            stroke-linecap="round" />
+                        <path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor"
+                            opacity=".75" />
+                        <path d="M10 21 C 16 17, 22 17, 27 20 C 22 26, 14 26, 10 21 Z" fill="currentColor"
+                            opacity=".45" />
                         <circle cx="35" cy="9" r="3" fill="currentColor" />
                     </svg>
                 </div>
 
-                <span class="block text-[clamp(18px,4.5vw,24px)] text-verde animate__animated animate__pulse animate__infinite mb-2">&#127807;</span>
+                <span
+                    class="block text-[clamp(18px,4.5vw,24px)] text-verde animate__animated animate__pulse animate__infinite mb-2">&#127807;</span>
                 <h2
                     class="font-script font-normal text-[clamp(30px,8vw,42px)] max-[480px]:text-[clamp(26px,8vw,36px)] text-verde mb-1 leading-[1.15]">
                     Feliz<br>Cumpleaños</h2>
                 <div
                     class="font-script text-[clamp(34px,9vw,48px)] max-[480px]:text-[clamp(28px,8vw,40px)] leading-none mt-0.5 bg-linear-to-br from-dorado via-dorado-claro to-dorado bg-clip-text text-transparent animate-brillo-dorado">
-                    amor Lisbeth</div>
+                    corazon Lisbeth</div>
 
-                <div class="mt-4 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-dorado/60 bg-salvia-claro/40 animate__animated animate__pulse animate__infinite">
+                <div
+                    class="mt-4 inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full border border-dorado/60 bg-salvia-claro/40 animate__animated animate__pulse animate__infinite">
                     <span class="text-verde text-[clamp(13px,3vw,15px)]">&#127807;</span>
-                    <span class="text-verde text-[clamp(10px,2.4vw,12px)] tracking-[1.2px] uppercase font-medium">Ingeniera
+                    <span class="text-verde text-[clamp(10px,2.4vw,12px)] tracking-[1.2px] uppercase font-medium">Futura
+                        Ingeniera
                         Ambiental</span>
                 </div>
 
-                <p class="mt-3 italic text-[clamp(12px,2.8vw,14px)] text-tierra min-h-[20px]"><span id="textoTipo"></span></p>
+                <p class="mt-3 italic text-[clamp(12px,2.8vw,14px)] text-tierra min-h-[20px]"><span
+                        id="textoTipo"></span></p>
 
-                <p class="toque mt-[12px] tracking-[0.6px] text-tierra text-[clamp(12.5px,3vw,14.5px)] animate-pulso">Toca la
+                <p class="toque mt-[12px] tracking-[0.6px] text-tierra text-[clamp(12.5px,3vw,14.5px)] animate-pulso">
+                    Toca la
                     carta para leerla &#10084;</p>
             </div>
         </div>
@@ -658,7 +679,8 @@
             <div
                 class="esquina tl absolute top-2.5 left-2.5 w-[clamp(38px,8vw,54px)] h-[clamp(38px,8vw,54px)] text-dorado opacity-80 z-[1] max-[480px]:w-[clamp(30px,7vw,42px)] max-[480px]:h-[clamp(30px,7vw,42px)]">
                 <svg class="w-full h-full block" viewBox="0 0 60 60">
-                    <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
+                    <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.6" fill="none"
+                        stroke-linecap="round" />
                     <path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor" opacity=".75" />
                     <path d="M10 21 C 16 17, 22 17, 27 20 C 22 26, 14 26, 10 21 Z" fill="currentColor" opacity=".45" />
                     <circle cx="35" cy="9" r="3" fill="currentColor" />
@@ -667,7 +689,8 @@
             <div
                 class="esquina tr absolute top-2.5 right-2.5 w-[clamp(38px,8vw,54px)] h-[clamp(38px,8vw,54px)] text-dorado opacity-80 z-[1] -scale-x-100 max-[480px]:w-[clamp(30px,7vw,42px)] max-[480px]:h-[clamp(30px,7vw,42px)]">
                 <svg class="w-full h-full block" viewBox="0 0 60 60">
-                    <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
+                    <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.6" fill="none"
+                        stroke-linecap="round" />
                     <path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor" opacity=".75" />
                     <path d="M10 21 C 16 17, 22 17, 27 20 C 22 26, 14 26, 10 21 Z" fill="currentColor" opacity=".45" />
                     <circle cx="35" cy="9" r="3" fill="currentColor" />
@@ -676,7 +699,8 @@
             <div
                 class="esquina bl absolute bottom-2.5 left-2.5 w-[clamp(38px,8vw,54px)] h-[clamp(38px,8vw,54px)] text-dorado opacity-80 z-[1] -scale-y-100 max-[480px]:w-[clamp(30px,7vw,42px)] max-[480px]:h-[clamp(30px,7vw,42px)]">
                 <svg class="w-full h-full block" viewBox="0 0 60 60">
-                    <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
+                    <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.6" fill="none"
+                        stroke-linecap="round" />
                     <path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor" opacity=".75" />
                     <path d="M10 21 C 16 17, 22 17, 27 20 C 22 26, 14 26, 10 21 Z" fill="currentColor" opacity=".45" />
                     <circle cx="35" cy="9" r="3" fill="currentColor" />
@@ -685,7 +709,8 @@
             <div
                 class="esquina br absolute bottom-2.5 right-2.5 w-[clamp(38px,8vw,54px)] h-[clamp(38px,8vw,54px)] text-dorado opacity-80 z-[1] -scale-x-100 -scale-y-100 max-[480px]:w-[clamp(30px,7vw,42px)] max-[480px]:h-[clamp(30px,7vw,42px)]">
                 <svg class="w-full h-full block" viewBox="0 0 60 60">
-                    <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.6" fill="none" stroke-linecap="round" />
+                    <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.6" fill="none"
+                        stroke-linecap="round" />
                     <path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor" opacity=".75" />
                     <path d="M10 21 C 16 17, 22 17, 27 20 C 22 26, 14 26, 10 21 Z" fill="currentColor" opacity=".45" />
                     <circle cx="35" cy="9" r="3" fill="currentColor" />
@@ -703,11 +728,13 @@
                     </div>
                     <h1
                         class="font-script text-[clamp(38px,10vw,58px)] max-[480px]:text-[clamp(30px,9vw,44px)] leading-[1.1] bg-linear-to-br from-verde via-verde-medio to-verde bg-clip-text text-transparent animate-brillo-lento">
-                        Feliz Cumpleaños,<br>mi amor</h1>
+                        Feliz Cumpleaños,<br>mi niña bonita</h1>
                     <p
                         class="font-display italic text-[clamp(12px,2.8vw,15px)] tracking-[2.5px] uppercase mt-1.5 flex items-center justify-center gap-2 [text-shadow:0_0_12px_rgba(184,147,90,0.25)]">
-                        <span class="text-dorado">&#10022;</span><span class="text-verde">Para la persona más especial de mi
-                            vida</span><span class="text-dorado">&#10022;</span></p>
+                        <span class="text-dorado">&#10022;</span><span class="text-verde">Para la persona más especial
+                            de mi
+                            vida</span><span class="text-dorado">&#10022;</span>
+                    </p>
                 </div>
 
 
@@ -745,59 +772,56 @@
                                 class="w-[3px] h-2 bg-dorado rounded-[2px]"></span>
                         </div>
                     </div>
-                    <div id="ytAudio" class="absolute w-px h-px opacity-0 pointer-events-none"
-                        aria-hidden="true"></div>
+                    <div id="ytAudio" class="absolute w-px h-px opacity-0 pointer-events-none" aria-hidden="true"></div>
                 </div>
 
                 <div
                     class="cuerpo text-[clamp(16px,3.6vw,18.5px)] max-[480px]:text-[clamp(15px,3.5vw,17px)] leading-[1.9] max-[480px]:leading-[1.8] text-tinta text-justify">
                     <p class="mb-5 first-letter:font-script first-letter:text-[clamp(46px,11vw,62px)] first-letter:text-verde first-letter:float-left first-letter:leading-[.75] first-letter:mr-2 first-letter:mt-2 max-[360px]:first-letter:float-none max-[360px]:first-letter:inline max-[360px]:first-letter:mr-[3px]"
-                        data-aos="fade-up" data-aos-delay="0">Hoy quiero regalarte algo más valioso que cualquier cosa que
-                        pueda
-                        envolver: mis palabras, mis recuerdos contigo, y todo lo que siento.</p>
+                        data-aos="fade-up" data-aos-delay="0">Hoy quiero regalarte algo más valioso que cualquier cosa
+                        que pueda envolver: mis palabras, mis recuerdos contigo, y todo el tiempo que hemos compartido.
+                    </p>
 
-                    <p class="mb-5" data-aos="fade-up" data-aos-delay="80">Sé que tu cumpleaños es mañana, pero como mañana ya
-                        estarás de
-                        viaje donde tus papás y tu hijita, no podía dejar pasar la oportunidad de decirte todo esto
-                        antes, con el mismo cariño de siempre. Me alegra tanto que puedas ir a disfrutar de ese tiempo
-                        con ellos antes de que empieces la universidad; te lo mereces, y sé lo importante que es para ti
-                        estar cerca de tu hijita en estos días.</p>
+                    <p class="mb-5" data-aos="fade-up" data-aos-delay="80">Feliz cumpleaños. Sé que ahora mismo no puedo
+                        estar a tu lado para darte esos abrazotes fuertes que te mereces, porque estás junto a tus papás
+                        y a tu hijita, pero no quería dejar pasar la oportunidad de decirte todo esto con el mismo
+                        cariño de siempre. Me alegra tanto que puedas disfrutar de ese tiempo con ellos antes de
+                        comenzar la universidad; te lo ganaste, y sé lo mucho que significa para ti estar cerca de tu
+                        pequeña en estos días. Aprovecho también para recordarte por qué ocupas un lugar tan grande en
+                        mi vida.</p>
 
                     <p class="mb-5" data-aos="fade-up" data-aos-delay="160">
-                        ¿Te acuerdas cómo empezó todo? Nos conocimos cuando llegaste de la
-                        nada jugar fútbol, sin planearlo, sin buscarlo, como si la vida ya supiera lo que hacía. Después
-                        empecé a ir a recogerte para que fuéramos juntos a jugar, y en cada uno de esos momentos, sin
-                        darme cuenta, fui enamorándome más de ti con cada palabra, cada risa, cada silencio compartido.
-                        Llegó un momento en que ya no pude guardarme lo que sentía, y con el corazón en la mano te dije
-                        que quería que fueras mi enamorada. Nunca voy a olvidar ese instante, porque cuando dijiste que
-                        sí, sentí que el mundo entero se acomodaba, que por fin todo tenía sentido. Ese día no solo gané
-                        una enamorada, gané a la persona que le dio color a mi vida.</p>
+                        Eres esa persona importante que está conmigo en las buenas y en las malas, la que no suelta mi
+                        mano ni cuando todo se complica. Eso no lo encuentra cualquiera, y yo lo encontré en ti. Por eso
+                        me encanta lo cardiaca que eres, lo tierna, lo amorosa; me fascina cómo sacas fuerzas hasta de
+                        donde no hay, cómo enfrentas cada reto sin dejar de sonreír, y cómo, aun con todo lo que cargas
+                        encima, siempre guardas un espacio para las personas que quieres. Me encantan tus ojitos, y
+                        sobre todo esa sonrisa que sin darte cuenta se convirtió en uno de mis lugares favoritos del
+                        mundo.</p>
 
-                    <p class="mb-5" data-aos="fade-up" data-aos-delay="240">Desde entonces no ha pasado un solo día en que no
-                        agradezca
-                        haberme animado a hablarte. Eres esa persona tan especial e importante para mí, la que está
-                        conmigo en las buenas y en las malas, la que no suelta mi mano ni cuando todo se complica. Eso
-                        no lo encuentra cualquiera, y yo lo encontré en ti.</p>
+                    <p class="mb-5" data-aos="fade-up" data-aos-delay="240">Y hablando de cariño, admiro muchísimo la
+                        mamá que eres. Verte cuidar, proteger y amar a tu hijita como lo haces me muestra el tipo de
+                        mujer fuerte y entregada que eres. No cualquiera logra lo que tú logras cada día, y eso también
+                        forma parte de por qué te aprecio tanto.</p>
 
-                    <p class="mb-5" data-aos="fade-up" data-aos-delay="320">Me encanta lo cardiaca que eres, lo tierna, lo
-                        amorosa. Me
-                        encantan tus ojitos, y sobre todo esa sonrisa tuya que sin darte cuenta se convirtió en uno de
-                        mis lugares favoritos del mundo. Y también admiro mucho la mamá que eres, cómo cuidas y amas a
-                        tu hijita; eso también es parte de por qué te quiero tanto.</p>
+                    <p class="mb-5" data-aos="fade-up" data-aos-delay="320">Justo por eso, ahora que inicias este nuevo
+                        capítulo con la universidad, quiero que tengas algo claro: contarás con mi apoyo en todo
+                        momento. En los días fáciles y en los complicados, en tus logros y en tus tropiezos, en tus
+                        metas y en tus dudas. No estarás sola en esto; yo estaré ahí, alentándote, celebrando cada
+                        avance a tu lado y sosteniéndote cuando haga falta. Confía en que, pase lo que pase, puedes
+                        contar conmigo.</p>
 
-                    <p class="mb-5" data-aos="fade-up" data-aos-delay="400">Gracias por elegirme, por quedarte, por ser mi
-                        persona. Que este
-                        nuevo etapa de vida te llene de todo lo bueno que mereces, que es mucho. Disfruta cada momento
-                        con tus papás y sobre todo con tu hijita, dale muchos abrazos de mi parte, y que empieces esta
-                        nueva etapa de la universidad con toda la fuerza y el cariño que te mereces. Aquí voy a estar,
-                        esperándote, queriendote más y más que el primer día.</p>
+                    <p class="mb-5" data-aos="fade-up" data-aos-delay="400">Que este nuevo ciclo de tu vida te llene de
+                        todo lo bueno que mereces, que es muchísimo. Mientras tanto, disfruta cada instante con tus
+                        papás y, sobre todo, con tu hijita; dale muchos abrazos de mi parte, y comienza esta etapa con
+                        toda la fuerza y el entusiasmo que te caracterizan.</p>
 
                     <p class="mb-5" data-aos="fade-up" data-aos-delay="480">
-                        Feliz cumpleaños, mi amor. Te kiero mucho muchote con todo lo que
-                        soy.</p>
+                        Feliz cumpleaños, mi niña bonita. Te quiero muchísimo, con todo lo que soy.</p>
                 </div>
 
-                <div class="flex items-center justify-center gap-3 my-1.5 mb-[26px]" data-aos="fade-up" data-aos-delay="100">
+                <div class="flex items-center justify-center gap-3 my-1.5 mb-[26px]" data-aos="fade-up"
+                    data-aos-delay="100">
                     <span class="w-[60px] h-px bg-linear-to-r from-transparent to-dorado"></span><span
                         class="text-verde text-[15px]">&#10039;</span><span
                         class="w-[60px] h-px bg-linear-to-l from-transparent to-dorado"></span>
@@ -805,7 +829,7 @@
 
                 <div class="text-right font-script text-[clamp(30px,7vw,40px)] max-[480px]:text-[clamp(26px,7vw,34px)] text-verde"
                     data-aos="fade-left" data-aos-delay="100">
-                    Tuyo siempre</div>
+                    Tuyo hasta el infinito y más allá </div>
 
                 <button
                     class="btn-repetir relative overflow-hidden block mx-auto mt-[30px] px-[22px] py-2.5 bg-transparent border border-dorado text-verde italic text-[clamp(13px,3vw,15px)] tracking-[1px] rounded-full cursor-pointer transition-all duration-300 ease-out hover:bg-verde hover:text-crema hover:shadow-[0_0_20px_rgba(47,93,58,0.45),0_0_40px_rgba(184,147,90,0.25)] hover:-translate-y-0.5"
