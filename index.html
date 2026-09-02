@@ -129,7 +129,8 @@
         }
 
         @layer base {
-            * { box-sizing: border-box; cursor: none !important; }
+            * { box-sizing: border-box; }
+            body.hs-cursor-ativo * { cursor: none !important; }
             html { -webkit-text-size-adjust: 100%; }
             body {
                 padding: max(clamp(12px,4vw,44px), env(safe-area-inset-top)) max(clamp(16px,4vw,44px), env(safe-area-inset-right)) max(clamp(12px,4vw,44px), env(safe-area-inset-bottom)) max(clamp(16px,4vw,44px), env(safe-area-inset-left));
@@ -169,12 +170,11 @@
         #cursor-dot {
             position: fixed; width: 8px; height: 8px; border-radius: 50%;
             background: #e3c896; pointer-events: none; z-index: 9998;
-            transition: transform 0.1s ease; mix-blend-mode: difference;
+            transition: transform 0.1s ease;
         }
         #cursor-ring {
             position: fixed; width: 36px; height: 36px; border-radius: 50%;
             border: 1.5px solid rgba(184,147,90,0.4); pointer-events: none; z-index: 9997;
-            transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
         }
         #cursor-ring.hovering {
             width: 56px; height: 56px; border-color: rgba(106,160,111,0.6);
@@ -306,11 +306,6 @@
         .parrafo-reveal.visible {
             opacity: 1; transform: translateY(0);
         }
-        .parrafo-reveal .word {
-            display: inline-block; opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        .parrafo-reveal.visible .word { opacity: 1; }
 
         /* ---- contador ---- */
         .contador-item {
@@ -320,6 +315,7 @@
         .contador-num {
             font-family: 'Playfair Display', serif;
             font-size: clamp(28px, 6vw, 38px); font-weight: 700;
+            color: #b8935a;
             background: linear-gradient(135deg, #b8935a, #e3c896);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             background-clip: text; line-height: 1;
@@ -363,7 +359,8 @@
             .portada { display: none; }
             .carta { pointer-events: auto; }
             #cursor-dot, #cursor-ring { display: none !important; }
-            * { cursor: auto !important; }
+            body { cursor: auto !important; }
+            body * { cursor: auto !important; }
         }
     </style>
 </head>
@@ -638,6 +635,7 @@
         let particleCount = 0;
 
         if (!prefiereMenosMovimiento && window.innerWidth > 768) {
+            document.body.classList.add('hs-cursor-ativo');
             document.addEventListener('mousemove', (e) => {
                 mouseX = e.clientX;
                 mouseY = e.clientY;
