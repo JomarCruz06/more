@@ -1,8 +1,7 @@
-/* ============ AUDIO YOUTUBE ============ */
 let ytPlayer = null;
 let intentosAudio = 0;
 
-function initAudio() {
+function initModalAudio() {
     const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
     document.head.appendChild(tag);
@@ -19,35 +18,44 @@ function initAudio() {
             }
         });
     };
-
-    App.el.reproductor.addEventListener('click', () => {
-        if (App.el.reproductor.classList.contains('playing')) {
-            detenerAudio();
-        } else {
-            iniciarAudio();
-        }
-    });
 }
 
-function iniciarAudio() {
-    if (ytPlayer && ytPlayer.playVideo) {
-        intentosAudio = 0;
-        if (ytPlayer.unMute) ytPlayer.unMute();
-        ytPlayer.playVideo();
-        App.el.reproductorSub.innerHTML = 'Nuestra cancion &#127925;';
-        App.el.reproductor.classList.add('playing');
-        App.el.btnPlay.innerHTML = '&#10074;&#10074;';
-    } else if (intentosAudio < App.config.MAX_AUDIO_RETRIES) {
-        intentosAudio++;
-        setTimeout(iniciarAudio, 200);
+function toggleModalAudio() {
+    const player = document.getElementById('modalAudioPlayer');
+    const btn = document.getElementById('modalAudioBtn');
+    const sub = document.getElementById('modalAudioSub');
+
+    if (player.classList.contains('playing')) {
+        detenerModalAudio();
     } else {
-        mostrarAvisoAudio('No se pudo cargar la musica. Intenta de nuevo.');
+        if (ytPlayer && ytPlayer.playVideo) {
+            intentosAudio = 0;
+            if (ytPlayer.unMute) ytPlayer.unMute();
+            ytPlayer.playVideo();
+            sub.innerHTML = 'Nuestra cancion &#127925;';
+            player.classList.add('playing');
+            btn.innerHTML = '&#10074;&#10074;';
+            btn.classList.add('playing');
+        } else if (intentosAudio < App.config.MAX_AUDIO_RETRIES) {
+            intentosAudio++;
+            setTimeout(toggleModalAudio, 200);
+        } else {
+            mostrarToast('No se pudo cargar la musica', 'warning');
+        }
     }
 }
 
-function detenerAudio() {
+function detenerModalAudio() {
+    const player = document.getElementById('modalAudioPlayer');
+    const btn = document.getElementById('modalAudioBtn');
+    const sub = document.getElementById('modalAudioSub');
+
     if (ytPlayer && ytPlayer.pauseVideo) ytPlayer.pauseVideo();
-    App.el.reproductor.classList.remove('playing');
-    App.el.btnPlay.innerHTML = '&#9654;';
-    App.el.reproductorSub.innerHTML = 'Toca para escuchar &#10084;';
+    if (player) player.classList.remove('playing');
+    if (btn) { btn.innerHTML = '&#9654;'; btn.classList.remove('playing'); }
+    if (sub) sub.innerHTML = 'Toca para escuchar &#10084;';
+}
+
+function detenerAudio() {
+    detenerModalAudio();
 }

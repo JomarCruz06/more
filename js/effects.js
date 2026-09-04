@@ -1,9 +1,9 @@
-/* ============ AOS + TYPED + LENIS + EFECTO MAGNETICO ============ */
-function initEffects() {
-    if (window.AOS) {
-        AOS.init({ once: true, duration: 900, offset: 70, easing: 'ease-out-cubic' });
-    }
+function initGalleryLightbox() {
+    // Gallery items use onclick="abrirLightbox(...)" in HTML
+    // This function initializes any additional gallery features
+}
 
+function initEffects() {
     initTyped();
     initLenis();
     initMagneticEffect();
@@ -21,10 +21,10 @@ function initTyped() {
                 'Siempre juntos &#128149;',
                 'Tu y yo, el equipo perfecto &#128640;'
             ],
-            typeSpeed: 50,
-            backSpeed: 25,
-            backDelay: 1800,
-            startDelay: 800,
+            typeSpeed: 45,
+            backSpeed: 20,
+            backDelay: 2000,
+            startDelay: 1000,
             loop: true,
             showCursor: false
         });
@@ -42,15 +42,20 @@ function initLenis() {
 function initMagneticEffect() {
     if (App.prefs.reduceMotion || !App.prefs.isDesktop) return;
 
-    App.el.tarjetaPortada.addEventListener('mousemove', (e) => {
-        const rect = App.el.tarjetaPortada.getBoundingClientRect();
+    const card = App.el.tarjetaPortada;
+    if (!card) return;
+
+    card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top) / rect.height - 0.5;
-        App.el.tarjetaPortada.style.transform =
-            `perspective(800px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) scale(1.015)`;
+        card.style.transform =
+            `perspective(800px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) scale(1.02)`;
     });
 
-    App.el.tarjetaPortada.addEventListener('mouseleave', () => {
-        App.el.tarjetaPortada.style.transform = '';
+    card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+        card.style.transition = 'transform 0.6s cubic-bezier(.4,0,.2,1)';
+        setTimeout(() => { card.style.transition = ''; }, 600);
     });
 }

@@ -1,4 +1,3 @@
-/* ============ BARRA DE PROGRESO ============ */
 function initProgressBar() {
     window.addEventListener('scroll', () => {
         const scrollTop = window.scrollY;

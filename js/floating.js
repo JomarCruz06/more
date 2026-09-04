@@ -1,25 +1,22 @@
-/* ============ HOJAS FLOTANTES ============ */
 function initFloating() {
     if (App.prefs.reduceMotion) return;
 
-    function crearFlotante() {
+    function crear() {
         const c = document.createElement('span');
+        c.className = 'floating-emoji';
         const ale = Math.random();
-        c.innerHTML = ale < 0.4 ? '&#127807;' : ale < 0.7 ? '&#127806;' : (ale < 0.88 ? '&#10084;' : '&#10022;');
+        c.innerHTML = ale < 0.35 ? '&#127807;' : ale < 0.6 ? '&#127806;' : (ale < 0.85 ? '&#10084;' : '&#10022;');
 
-        const dorado = ale >= 0.88;
-        c.className = 'fixed -bottom-[6vh] opacity-0 pointer-events-none z-0 animate-flotar drop-shadow-[0_0_3px_rgba(0,0,0,0.12)]' +
-            (dorado ? ' text-dorado-claro drop-shadow-[0_0_8px_rgba(184,147,90,0.5)]' : ' text-salvia-claro/70');
-
-        const tam = 12 + Math.random() * 14;
+        const tam = 12 + Math.random() * 10;
         c.style.left = Math.random() * 100 + '%';
         c.style.fontSize = tam + 'px';
-        c.style.animationDuration = (9 + Math.random() * 7) + 's';
+        c.style.setProperty('--dur', (10 + Math.random() * 8) + 's');
+        c.style.color = ale >= 0.85 ? '#e3c896' : 'rgba(157,181,165,0.5)';
 
         App.el.capaCorazones.appendChild(c);
-        setTimeout(() => c.remove(), 16000);
+        setTimeout(() => c.remove(), 18000);
     }
 
-    setInterval(crearFlotante, App.config.FLOAT_INTERVAL);
-    for (let i = 0; i < 4; i++) setTimeout(crearFlotante, i * 600);
+    setInterval(crear, App.config.FLOAT_INTERVAL);
+    for (let i = 0; i < 3; i++) setTimeout(crear, i * 700);
 }
