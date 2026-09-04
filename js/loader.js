@@ -35,7 +35,7 @@ function iniciarLoader() {
             if (porcentaje) porcentaje.textContent = '100%';
             if (lineaLog) lineaLog.innerHTML = '&gt; sistema listo — abriendo la carta';
             setTimeout(() => {
-                App.el.loader.classList.add('hidden');
+                App.el.loader.classList.add('apagado');
             }, 400);
         }, App.config.DEMORA_LOADER);
     });
