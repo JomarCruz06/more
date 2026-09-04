@@ -1,6 +1,6 @@
 /* ============ HOJAS FLOTANTES ============ */
 function initFloating() {
-    if (PREFIERE_MENOS_MOVIMIENTO) return;
+    if (App.prefs.reduceMotion) return;
 
     function crearFlotante() {
         const c = document.createElement('span');
@@ -16,10 +16,10 @@ function initFloating() {
         c.style.fontSize = tam + 'px';
         c.style.animationDuration = (9 + Math.random() * 7) + 's';
 
-        DOM.capaCorazones.appendChild(c);
+        App.el.capaCorazones.appendChild(c);
         setTimeout(() => c.remove(), 16000);
     }
 
-    setInterval(crearFlotante, CONFIG.FLOAT_INTERVAL);
+    setInterval(crearFlotante, App.config.FLOAT_INTERVAL);
     for (let i = 0; i < 4; i++) setTimeout(crearFlotante, i * 600);
 }

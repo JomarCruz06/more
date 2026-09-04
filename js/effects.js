@@ -1,22 +1,19 @@
 /* ============ AOS + TYPED + LENIS + EFECTO MAGNETICO ============ */
 function initEffects() {
-    initAOS();
+    if (window.AOS) {
+        AOS.init({ once: true, duration: 900, offset: 70, easing: 'ease-out-cubic' });
+    }
+
     initTyped();
     initLenis();
     initMagneticEffect();
 }
 
-function initAOS() {
-    if (window.AOS) {
-        AOS.init({ once: true, duration: 900, offset: 70, easing: 'ease-out-cubic' });
-    }
-}
-
 function initTyped() {
-    if (!DOM.textoTipo) return;
+    if (!App.el.textoTipo) return;
 
-    if (!PREFIERE_MENOS_MOVIMIENTO && window.Typed) {
-        new Typed(DOM.textoTipo, {
+    if (!App.prefs.reduceMotion && window.Typed) {
+        new Typed(App.el.textoTipo, {
             strings: [
                 'Mi ingeniera ambiental &#127807;',
                 'Cuidando del planeta y de mi &#128154;',
@@ -32,28 +29,28 @@ function initTyped() {
             showCursor: false
         });
     } else {
-        DOM.textoTipo.textContent = 'Mi ingeniera ambiental';
+        App.el.textoTipo.textContent = 'Mi ingeniera ambiental';
     }
 }
 
 function initLenis() {
-    if (!PREFIERE_MENOS_MOVIMIENTO && window.Lenis) {
-        new Lenis({ autoRaf: true });
+    if (!App.prefs.reduceMotion && window.Lenis) {
+        window.lenisInstance = new Lenis({ autoRaf: true });
     }
 }
 
 function initMagneticEffect() {
-    if (PREFIERE_MENOS_MOVIMIENTO || !ES_ESCRITORIO) return;
+    if (App.prefs.reduceMotion || !App.prefs.isDesktop) return;
 
-    DOM.tarjetaPortada.addEventListener('mousemove', (e) => {
-        const rect = DOM.tarjetaPortada.getBoundingClientRect();
+    App.el.tarjetaPortada.addEventListener('mousemove', (e) => {
+        const rect = App.el.tarjetaPortada.getBoundingClientRect();
         const x = (e.clientX - rect.left) / rect.width - 0.5;
         const y = (e.clientY - rect.top) / rect.height - 0.5;
-        DOM.tarjetaPortada.style.transform =
+        App.el.tarjetaPortada.style.transform =
             `perspective(800px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) scale(1.015)`;
     });
 
-    DOM.tarjetaPortada.addEventListener('mouseleave', () => {
-        DOM.tarjetaPortada.style.transform = '';
+    App.el.tarjetaPortada.addEventListener('mouseleave', () => {
+        App.el.tarjetaPortada.style.transform = '';
     });
 }

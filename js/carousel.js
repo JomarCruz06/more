@@ -6,13 +6,13 @@ function initCarousel() {
 
     function goToSlide(n) {
         currentSlide = (n + totalSlides) % totalSlides;
-        DOM.carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+        App.el.carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
         dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
     }
 
-    DOM.prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
-    DOM.nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
+    App.el.prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
+    App.el.nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
     dots.forEach(d => d.addEventListener('click', () => goToSlide(+d.dataset.slide)));
 
-    setInterval(() => goToSlide(currentSlide + 1), CONFIG.CAROUSEL_INTERVAL);
+    setInterval(() => goToSlide(currentSlide + 1), App.config.CAROUSEL_INTERVAL);
 }

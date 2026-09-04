@@ -1,8 +1,8 @@
 /* ============ PARTICULAS DE FONDO ============ */
 function initParticles() {
-    if (PREFIERE_MENOS_MOVIMIENTO) return;
+    if (App.prefs.reduceMotion) return;
 
-    for (let i = 0; i < CONFIG.PARTICLE_COUNT; i++) {
+    for (let i = 0; i < App.config.PARTICLE_COUNT; i++) {
         const p = document.createElement('div');
         p.className = 'particle';
         p.style.left = Math.random() * 100 + '%';
@@ -19,6 +19,6 @@ function initParticles() {
         p.style.animationDelay = Math.random() * 5 + 's';
         p.style.animationDuration = (3 + Math.random() * 4) + 's';
 
-        DOM.capaParticulas.appendChild(p);
+        App.el.capaParticulas.appendChild(p);
     }
 }

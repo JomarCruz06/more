@@ -1,12 +1,7 @@
 /* ============ CONTADOR DE TIEMPO ============ */
 function initCounter() {
-    const cDias = document.getElementById('c-dias');
-    const cHoras = document.getElementById('c-horas');
-    const cMin = document.getElementById('c-min');
-    const cSeg = document.getElementById('c-seg');
-
     function actualizar() {
-        const inicio = new Date(CONFIG.FECHA_INICIO);
+        const inicio = new Date(App.config.FECHA_INICIO);
         const ahora = new Date();
         const diff = ahora - inicio;
 
@@ -15,10 +10,10 @@ function initCounter() {
         const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         const segundos = Math.floor((diff % (1000 * 60)) / 1000);
 
-        cDias.textContent = dias;
-        cHoras.textContent = String(horas).padStart(2, '0');
-        cMin.textContent = String(minutos).padStart(2, '0');
-        cSeg.textContent = String(segundos).padStart(2, '0');
+        App.el.cDias.textContent = dias;
+        App.el.cHoras.textContent = String(horas).padStart(2, '0');
+        App.el.cMin.textContent = String(minutos).padStart(2, '0');
+        App.el.cSeg.textContent = String(segundos).padStart(2, '0');
     }
 
     actualizar();

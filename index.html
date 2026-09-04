@@ -51,10 +51,7 @@
             --animate-flotar-hoja: flotar-hoja 5s ease-in-out infinite;
             --animate-pulso: pulso 2.2s ease-in-out infinite;
             --animate-brillo-lento: brillo-dorado 3s ease-in-out infinite;
-            --animate-pulso-play: pulso-play 1.2s ease-in-out infinite;
             --animate-burst: burst 1.1s ease-out forwards;
-            --animate-glow-ring: glow-ring 2.5s ease-in-out infinite;
-            --animate-float-slow: float-slow 8s ease-in-out infinite;
 
             @keyframes centelleo {
                 0%, 100% { opacity: 0; transform: scale(.8); }
@@ -83,52 +80,12 @@
                 0%, 100% { filter: brightness(1); }
                 50% { filter: brightness(1.2); }
             }
-            @keyframes pulso-play {
-                0%, 100% { box-shadow: 0 2px 8px rgba(0,0,0,.25); }
-                50% { box-shadow: 0 2px 20px rgba(184,147,90,.65), 0 0 40px rgba(184,147,90,.2); }
-            }
             @keyframes burst {
                 to { transform: translate(var(--dx), var(--dy)) scale(.4) rotate(var(--rot)); opacity: 0; }
-            }
-            @keyframes glow-ring {
-                0%, 100% { box-shadow: 0 0 20px rgba(184,147,90,0.15), 0 0 60px rgba(74,124,89,0.08); }
-                50% { box-shadow: 0 0 35px rgba(184,147,90,0.3), 0 0 80px rgba(74,124,89,0.15); }
             }
             @keyframes float-slow {
                 0%, 100% { transform: translateY(0) rotate(0deg); }
                 50% { transform: translateY(-12px) rotate(2deg); }
-            }
-            @keyframes onda {
-                0%, 100% { height: 6px; }
-                50% { height: 20px; }
-            }
-            @keyframes pulse-dot {
-                0%, 100% { transform: scale(1); opacity: .4; }
-                50% { transform: scale(1.5); opacity: .8; }
-            }
-            @keyframes aurora {
-                0% { transform: translate(-30%, -20%) rotate(0deg) scale(1); }
-                33% { transform: translate(10%, -30%) rotate(120deg) scale(1.1); }
-                66% { transform: translate(-10%, 10%) rotate(240deg) scale(0.95); }
-                100% { transform: translate(-30%, -20%) rotate(360deg) scale(1); }
-            }
-            @keyframes aurora2 {
-                0% { transform: translate(20%, 10%) rotate(0deg) scale(1.05); }
-                33% { transform: translate(-20%, 20%) rotate(-120deg) scale(0.9); }
-                66% { transform: translate(15%, -15%) rotate(-240deg) scale(1.1); }
-                100% { transform: translate(20%, 10%) rotate(-360deg) scale(1.05); }
-            }
-            @keyframes loader-ring {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-            @keyframes loader-pulse {
-                0%, 100% { transform: scale(1); opacity: .6; }
-                50% { transform: scale(1.15); opacity: 1; }
-            }
-            @keyframes text-reveal {
-                from { clip-path: inset(0 100% 0 0); }
-                to { clip-path: inset(0 0% 0 0); }
             }
         }
 
@@ -495,6 +452,7 @@
 
     <!-- JavaScript modules (orden importa) -->
     <script src="js/config.js"></script>
+    <script src="js/swal.js"></script>
     <script src="js/loader.js"></script>
     <script src="js/cursor.js"></script>
     <script src="js/progress.js"></script>

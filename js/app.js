@@ -1,7 +1,9 @@
 /* ============================================================
-   APP.JS - Inicializador principal
+   APP - Inicializador principal
    ============================================================ */
 document.addEventListener('DOMContentLoaded', () => {
+    App.init();
+
     initLoader();
     initCursor();
     initProgressBar();

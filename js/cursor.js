@@ -1,8 +1,8 @@
 /* ============ CURSOR PERSONALIZADO ============ */
 function initCursor() {
-    if (PREFIERE_MENOS_MOVIMIENTO || !ES_ESCRITORIO) {
-        DOM.cursorDot.style.display = 'none';
-        DOM.cursorRing.style.display = 'none';
+    if (App.prefs.reduceMotion || !App.prefs.isDesktop) {
+        App.el.cursorDot.style.display = 'none';
+        App.el.cursorRing.style.display = 'none';
         return;
     }
 
@@ -15,8 +15,8 @@ function initCursor() {
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-        DOM.cursorDot.style.left = mouseX - 4 + 'px';
-        DOM.cursorDot.style.top = mouseY - 4 + 'px';
+        App.el.cursorDot.style.left = mouseX - 4 + 'px';
+        App.el.cursorDot.style.top = mouseY - 4 + 'px';
 
         particleCount++;
         if (particleCount % 3 === 0) {
@@ -27,13 +27,16 @@ function initCursor() {
     function animarCursor() {
         ringX += (mouseX - ringX) * 0.12;
         ringY += (mouseY - ringY) * 0.12;
-        DOM.cursorRing.style.left = ringX - 18 + 'px';
-        DOM.cursorRing.style.top = ringY - 18 + 'px';
+        App.el.cursorRing.style.left = ringX - 18 + 'px';
+        App.el.cursorRing.style.top = ringY - 18 + 'px';
         requestAnimationFrame(animarCursor);
     }
     animarCursor();
 
-    setupHoverEffects();
+    document.querySelectorAll('button, a, .tarjeta-portada, .reproductor-fondo, .carousel-dot').forEach(el => {
+        el.addEventListener('mouseenter', () => App.el.cursorRing.classList.add('hovering'));
+        el.addEventListener('mouseleave', () => App.el.cursorRing.classList.remove('hovering'));
+    });
 }
 
 function spawnCursorParticle(x, y) {
@@ -43,11 +46,4 @@ function spawnCursorParticle(x, y) {
     p.style.top = y + 'px';
     document.body.appendChild(p);
     setTimeout(() => p.remove(), 600);
-}
-
-function setupHoverEffects() {
-    document.querySelectorAll('button, a, .tarjeta-portada, .reproductor-fondo, .carousel-dot').forEach(el => {
-        el.addEventListener('mouseenter', () => DOM.cursorRing.classList.add('hovering'));
-        el.addEventListener('mouseleave', () => DOM.cursorRing.classList.remove('hovering'));
-    });
 }

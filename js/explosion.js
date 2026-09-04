@@ -1,8 +1,8 @@
 /* ============ EXPLOSION AL ABRIR ============ */
 function explotarCorazones(x, y) {
-    if (PREFIERE_MENOS_MOVIMIENTO) return;
+    if (App.prefs.reduceMotion) return;
 
-    for (let i = 0; i < CONFIG.EXPLOSION_COUNT; i++) {
+    for (let i = 0; i < App.config.EXPLOSION_COUNT; i++) {
         const h = document.createElement('span');
         h.className = 'absolute will-change-transform animate-burst';
 
@@ -10,7 +10,7 @@ function explotarCorazones(x, y) {
         h.innerHTML = esHoja ? '&#127807;' : '&#10084;';
         h.style.color = esHoja ? '#6aa06f' : '#e3c896';
 
-        const angulo = (Math.PI * 2 * i) / CONFIG.EXPLOSION_COUNT + Math.random() * 0.4;
+        const angulo = (Math.PI * 2 * i) / App.config.EXPLOSION_COUNT + Math.random() * 0.4;
         const distancia = 70 + Math.random() * 120;
 
         h.style.left = x + 'px';
@@ -21,7 +21,7 @@ function explotarCorazones(x, y) {
         h.style.fontSize = (12 + Math.random() * 14) + 'px';
         h.style.animationDelay = (Math.random() * 0.2) + 's';
 
-        DOM.capaExplosion.appendChild(h);
+        App.el.capaExplosion.appendChild(h);
         setTimeout(() => h.remove(), 1500);
     }
 }

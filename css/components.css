@@ -1,3 +1,50 @@
+/* ============================================================
+   COMPONENTS - Estilos de componentes
+   Keyframes incluidos aqui porque vanilla CSS los necesita
+   ============================================================ */
+
+/* ---- KEYFRAMES (requeridos por vanilla CSS) ---- */
+@keyframes loader-ring {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+@keyframes loader-pulse {
+    0%, 100% { transform: scale(1); opacity: .6; }
+    50% { transform: scale(1.15); opacity: 1; }
+}
+@keyframes pulse-dot {
+    0%, 100% { transform: scale(1); opacity: .4; }
+    50% { transform: scale(1.5); opacity: .8; }
+}
+@keyframes onda {
+    0%, 100% { height: 6px; }
+    50% { height: 20px; }
+}
+@keyframes aurora {
+    0% { transform: translate(-30%, -20%) rotate(0deg) scale(1); }
+    33% { transform: translate(10%, -30%) rotate(120deg) scale(1.1); }
+    66% { transform: translate(-10%, 10%) rotate(240deg) scale(0.95); }
+    100% { transform: translate(-30%, -20%) rotate(360deg) scale(1); }
+}
+@keyframes aurora2 {
+    0% { transform: translate(20%, 10%) rotate(0deg) scale(1.05); }
+    33% { transform: translate(-20%, 20%) rotate(-120deg) scale(0.9); }
+    66% { transform: translate(15%, -15%) rotate(-240deg) scale(1.1); }
+    100% { transform: translate(20%, 10%) rotate(-360deg) scale(1.05); }
+}
+@keyframes glow-ring {
+    0%, 100% { box-shadow: 0 0 20px rgba(184,147,90,0.15), 0 0 60px rgba(74,124,89,0.08); }
+    50% { box-shadow: 0 0 35px rgba(184,147,90,0.3), 0 0 80px rgba(74,124,89,0.15); }
+}
+@keyframes pulso-play {
+    0%, 100% { box-shadow: 0 2px 8px rgba(0,0,0,.25); }
+    50% { box-shadow: 0 2px 20px rgba(184,147,90,.65), 0 0 40px rgba(184,147,90,.2); }
+}
+@keyframes cursor-fade {
+    from { opacity: 1; transform: scale(1); }
+    to { opacity: 0; transform: scale(0); }
+}
+
 /* ---- loader ---- */
 #loader {
     position: fixed; inset: 0; z-index: 9999;
@@ -14,12 +61,12 @@
     display: flex; align-items: center; justify-content: center;
 }
 .loader-ring::after {
-    content: 'J'; font-family: 'Great Vibes', cursive;
+    content: 'J'; font-family: var(--font-script);
     font-size: 36px; color: #e3c896;
     animation: loader-pulse 1.5s ease-in-out infinite;
 }
 .loader-text {
-    margin-top: 20px; font-family: 'Cormorant Garamond', serif;
+    margin-top: 20px; font-family: var(--font-serif);
     color: rgba(215,228,201,0.5); font-size: 13px; letter-spacing: 3px;
     text-transform: uppercase;
 }
@@ -42,10 +89,6 @@
     pointer-events: none; z-index: 9996;
     background: radial-gradient(circle, rgba(184,147,90,0.7), transparent);
     animation: cursor-fade 0.6s ease-out forwards;
-}
-@keyframes cursor-fade {
-    from { opacity: 1; transform: scale(1); }
-    to { opacity: 0; transform: scale(0); }
 }
 
 /* ---- barra de progreso ---- */
@@ -79,13 +122,13 @@
 
 /* ---- textura de papel ---- */
 .carta::before {
-    content: ""; position: absolute; inset: 0;
+    content: ""; position: absolute; inset: 0; z-index: 0;
     background-image: radial-gradient(rgba(47,93,58,0.03) 1px, transparent 1px), radial-gradient(rgba(184,147,90,0.04) 1px, transparent 1px);
     background-size: 3px 3px, 5px 5px; background-position: 0 0, 2px 2px;
     pointer-events: none; border-radius: 4px;
 }
 .carta::after {
-    content: ""; position: absolute; inset: 0; border-radius: 4px;
+    content: ""; position: absolute; inset: 0; border-radius: 4px; z-index: 0;
     box-shadow: inset 0 0 100px rgba(47,93,58,0.06), inset 0 0 4px rgba(0,0,0,0.1);
     pointer-events: none;
 }
@@ -150,13 +193,13 @@
     animation: glow-ring 2.5s ease-in-out infinite;
 }
 
-/* ---- partículas ---- */
+/* ---- particulas ---- */
 .particle {
     position: absolute; border-radius: 50%; pointer-events: none;
     animation: pulse-dot 4s ease-in-out infinite;
 }
 
-/* ---- parallax párrafos ---- */
+/* ---- parallax parrafos ---- */
 .parrafo-reveal {
     opacity: 0; transform: translateY(30px);
     transition: opacity 0.7s ease, transform 0.7s ease;
@@ -171,7 +214,7 @@
     min-width: 60px;
 }
 .contador-num {
-    font-family: 'Playfair Display', serif;
+    font-family: var(--font-display);
     font-size: clamp(28px, 6vw, 38px); font-weight: 700;
     color: #b8935a;
     background: linear-gradient(135deg, #b8935a, #e3c896);
@@ -183,7 +226,7 @@
     text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px;
 }
 
-/* ---- controles ---- */
+/* ---- controles portada/carta ---- */
 .portada.oculto { display: none; }
 .portada.abriendo .tarjeta-portada {
     scale: 1.08; rotate: y 12deg; opacity: 0;
@@ -208,52 +251,65 @@
 @media (max-width: 360px) { .monograma { width: 60px; height: 60px; } }
 @media (max-height: 600px) and (orientation: landscape) { .monograma { width: 64px; height: 64px; } }
 
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-    .carta, .encabezado, .foto-marco, .reproductor, .cuerpo p, .firma, .separador {
-        opacity: 1 !important; translate: none !important; scale: none !important;
-        transform: none !important; max-height: none !important;
-    }
-    .portada { display: none; }
-    .carta { pointer-events: auto; }
-    #cursor-dot, #cursor-ring { display: none !important; }
-    body { cursor: auto !important; }
-    body * { cursor: auto !important; }
-}
-
 /* ---- SweetAlert2 personalizado ---- */
 .swal2-popup.swal-custom {
     background: linear-gradient(135deg, rgba(250,246,236,0.97), rgba(240,230,207,0.95));
     border: 1.5px solid rgba(184,147,90,0.35);
     border-radius: 16px;
     box-shadow: 0 25px 60px rgba(0,0,0,0.4), 0 0 80px rgba(74,124,89,0.08);
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-serif);
 }
 .swal-custom .swal2-title {
-    font-family: 'Great Vibes', cursive;
-    color: #2f5d3a;
+    font-family: var(--font-script);
+    color: var(--color-verde);
     font-size: clamp(24px, 5vw, 32px);
     font-weight: 400;
 }
 .swal-custom .swal2-html-container {
-    color: #39503f;
+    color: var(--color-tinta);
     font-size: clamp(14px, 3vw, 17px);
     line-height: 1.7;
     margin: 0.5em 0 0;
 }
-.swal-custom .swal2-confirm {
-    background: linear-gradient(135deg, #2f5d3a, #4a7c59) !important;
+.swal-custom .swal2-actions { gap: 10px; }
+.swal-custom .swal2-styled {
     border-radius: 50px !important;
-    font-family: 'Cormorant Garamond', serif !important;
-    font-size: 16px !important;
+    font-family: var(--font-serif) !important;
+    font-size: 15px !important;
     font-weight: 600 !important;
-    padding: 10px 32px !important;
-    box-shadow: 0 4px 16px rgba(47,93,58,0.35) !important;
+    padding: 10px 28px !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.15) !important;
     transition: all 0.3s ease !important;
 }
-.swal-custom .swal2-confirm:hover {
+.swal-custom .swal2-styled:hover {
     transform: translateY(-2px) !important;
-    box-shadow: 0 8px 24px rgba(47,93,58,0.45) !important;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.25) !important;
+}
+.swal-custom .swal2-confirm {
+    background: linear-gradient(135deg, var(--color-verde), var(--color-verde-medio)) !important;
+}
+.swal-custom .swal2-cancel {
+    background: linear-gradient(135deg, var(--color-tierra), #a08060) !important;
 }
 .swal-custom .swal2-icon .swal2-icon-content { font-size: 2.5em; }
-.swal-custom .swal2-timer-progress-bar { background: linear-gradient(90deg, #4a7c59, #b8935a); }
+.swal-custom .swal2-timer-progress-bar { background: linear-gradient(90deg, var(--color-verde-medio), var(--color-dorado)); }
+
+/* ---- reduced-motion: FORZADO con specificity alta ---- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+    }
+    .carta, .encabezado, .foto-marco, .reproductor, .cuerpo p, .separador {
+        opacity: 1 !important; translate: none !important; scale: none !important;
+        transform: none !important; max-height: none !important;
+    }
+    .portada { display: none !important; }
+    .carta { pointer-events: auto !important; }
+    /* Usar !important en cada selector individual para ganar specificity */
+    #cursor-dot { display: none !important; }
+    #cursor-ring { display: none !important; }
+    body.hs-cursor-ativo * { cursor: auto !important; }
+    body { cursor: auto !important; }
+}
