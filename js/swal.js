@@ -113,7 +113,7 @@ function construirHTMLCarta() {
                 <span style="color:#6aa06f;font-size:18px;">&#127807;</span>
                 <span></span>
             </div>
-            <h1>Para ti, mi nina bonita</h1>
+            <h1>Para ti, mi niña bonita</h1>
             <p>&#10022; Para mi persona favorita &#10022;</p>
         </div>
 
@@ -426,7 +426,7 @@ function confirmarCerrarCarta() {
 
     baseSwal({
         title: 'Volver a la portada?',
-        html: '<p style="margin:8px 0 0;">Podras leer la carta de nuevo cuando quieras.</p>',
+        html: '<p style="margin:8px 0 0;">Podras leer este detalle de nuevo cuantas veces.</p>',
         icon: 'question',
         iconColor: '#b8935a',
         showCancelButton: true,

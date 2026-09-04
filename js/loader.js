@@ -33,7 +33,7 @@ function iniciarLoader() {
             clearInterval(secuencia);
             if (barra) barra.style.width = '100%';
             if (porcentaje) porcentaje.textContent = '100%';
-            if (lineaLog) lineaLog.innerHTML = '&gt; sistema listo — abriendo la carta';
+            if (lineaLog) lineaLog.innerHTML = '&gt; sistema listo — abriendo este detalle';
             setTimeout(() => {
                 App.el.loader.classList.add('apagado');
             }, 400);
