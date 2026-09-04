@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    App.init();
+    App.iniciar();
 
-    initLoader();
-    initCursor();
-    initProgressBar();
-    initParticles();
-    initFloating();
-    initLetter();
-    initEffects();
+    iniciarLoader();
+    iniciarCursor();
+    iniciarBarraProgreso();
+    iniciarParticulas();
+    iniciarFlotantes();
+    iniciarCarta();
+    iniciarEfectos();
 });

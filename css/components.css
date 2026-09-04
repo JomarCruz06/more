@@ -133,6 +133,53 @@
     animation: shimmer 2s ease-in-out infinite;
     background-size: 200% 100%;
 }
+.loader-porcentaje {
+    margin-top: 14px;
+    font-family: 'Courier New', ui-monospace, monospace;
+    font-size: 13px;
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #e3c896, #b8935a);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.loader-log {
+    margin-top: 6px;
+    font-family: 'Courier New', ui-monospace, monospace;
+    font-size: 11px;
+    color: rgba(106,160,111,0.7);
+    letter-spacing: 1px;
+}
+.loader-log::after {
+    content: '▮';
+    margin-left: 4px;
+    color: rgba(106,160,111,0.9);
+    animation: cursor-fade 0.9s ease infinite;
+}
+
+/* ---- NEURAL GRID ---- */
+.rejilla-ia {
+    position: fixed; inset: 0; z-index: 0;
+    pointer-events: none;
+    background-image:
+        linear-gradient(rgba(74,124,89,0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(74,124,89,0.05) 1px, transparent 1px);
+    background-size: 46px 46px;
+    -webkit-mask-image: radial-gradient(ellipse at 50% 40%, rgba(0,0,0,0.8), transparent 75%);
+    mask-image: radial-gradient(ellipse at 50% 40%, rgba(0,0,0,0.8), transparent 75%);
+}
+.rejilla-ia::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(184,147,90,0.45) 1px, transparent 1.5px);
+    background-size: 46px 46px;
+    background-position: 23px 23px;
+    animation: retro-parpadeo 6s ease-in-out infinite;
+    opacity: 0.5;
+}
+@keyframes retro-parpadeo {
+    0%, 100% { opacity: 0.15; }
+    50% { opacity: 0.5; }
+}
 
 /* ---- CURSOR ---- */
 #cursor-dot {
@@ -230,6 +277,40 @@
 }
 .portada.oculto { display: none !important; }
 
+/* ---- ANILLO HOLOGRAMA ---- */
+.anillo-holograma {
+    position: absolute; left: 50%; top: 50%;
+    width: min(78vmin, 560px); height: min(78vmin, 560px);
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.5;
+    z-index: 1;
+}
+.anillo-holograma::before {
+    content: '';
+    position: absolute; inset: 0; border-radius: 50%;
+    background: conic-gradient(from 0deg,
+        transparent 0deg, rgba(74,124,89,0.35) 40deg,
+        transparent 90deg, rgba(184,147,90,0.25) 160deg,
+        transparent 210deg, rgba(106,160,111,0.3) 280deg,
+        transparent 330deg, transparent 360deg);
+    -webkit-mask: radial-gradient(circle, transparent 62%, black 63%, black 66%, transparent 67%);
+    mask: radial-gradient(circle, transparent 62%, black 63%, black 66%, transparent 67%);
+    animation: girar-anillo 14s linear infinite;
+    filter: blur(0.4px);
+}
+.anillo-holograma::after {
+    content: '';
+    position: absolute; inset: 12%;
+    border-radius: 50%;
+    border: 1px dashed rgba(106,160,111,0.2);
+    animation: girar-anillo 22s linear infinite reverse;
+}
+@keyframes girar-anillo {
+    to { transform: rotate(360deg); }
+}
+
 .tarjeta-portada {
     position: relative; z-index: 2;
     width: 100%; max-width: 380px;
@@ -269,6 +350,21 @@
         inset 0 1px 0 rgba(255,255,255,0.08),
         0 0 120px rgba(74,124,89,0.1),
         0 0 60px rgba(184,147,90,0.08);
+}
+
+/* ---- HOLOGRAM SHEEN ---- */
+.holografia {
+    position: absolute; inset: 0; border-radius: inherit;
+    pointer-events: none;
+    background:
+        linear-gradient(115deg, transparent 30%, rgba(106,160,111,0.08) 45%, rgba(227,200,150,0.1) 50%, rgba(74,124,89,0.08) 55%, transparent 70%);
+    background-size: 300% 300%;
+    animation: holograma-brillo 6s ease-in-out infinite;
+    mix-blend-mode: screen;
+}
+@keyframes holograma-brillo {
+    0%, 100% { background-position: 0% 0%; opacity: 0.5; }
+    50% { background-position: 100% 100%; opacity: 1; }
 }
 
 .monograma {
@@ -349,6 +445,34 @@
 .portada-cta svg {
     width: 14px; height: 14px;
     animation: float-up 3s ease-in-out infinite;
+}
+
+.portada-sistema {
+    margin-top: 22px;
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 14px;
+    background: rgba(6,10,20,0.55);
+    border: 1px solid rgba(106,160,111,0.18);
+    border-radius: 8px;
+    backdrop-filter: blur(6px);
+    position: relative; z-index: 1;
+    font-family: 'Courier New', ui-monospace, monospace;
+    font-size: 10.5px;
+    letter-spacing: 1px;
+    color: rgba(157,181,165,0.75);
+    max-width: 100%;
+    white-space: nowrap;
+}
+.sistema-punto {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #6aa06f;
+    box-shadow: 0 0 8px rgba(106,160,111,0.9);
+    flex: none;
+    animation: pulso-play 1.4s ease-in-out infinite;
+}
+.portada-sistema span:last-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* ---- FLOATING LEAVES ON COVER ---- */
@@ -453,6 +577,13 @@
 .swal-futuristic .swal2-html-container p:last-child {
     margin-bottom: 0;
 }
+.bienvenida-firma {
+    margin-top: 16px !important;
+    font-style: italic;
+    font-family: var(--font-script);
+    font-size: 18px !important;
+    color: rgba(184,147,90,0.7) !important;
+}
 .swal-futuristic .swal2-actions {
     padding: 20px 28px 24px;
     margin: 0;
@@ -543,8 +674,45 @@
     border-radius: 4px;
 }
 
+/* ---- TECH TOPBAR MODAL ---- */
+.letter-topbar {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 10px 0 0;
+    font-family: 'Courier New', ui-monospace, monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(106,160,111,0.7);
+}
+.topbar-punto {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #6aa06f;
+    box-shadow: 0 0 10px rgba(106,160,111,0.9);
+    animation: pulso-play 1.2s ease-in-out infinite;
+}
+.topbar-estado {
+    color: rgba(184,147,90,0.6);
+    border: 1px solid rgba(184,147,90,0.15);
+    padding: 2px 8px; border-radius: 4px;
+}
+
+/* ---- TECH CORNERS MODAL ---- */
+.tech-corners { position: absolute; inset: 0; pointer-events: none; z-index: 3; }
+.t-corner {
+    position: absolute;
+    width: 18px; height: 18px;
+    border: 1px solid rgba(106,160,111,0.4);
+    border-radius: 2px;
+    filter: drop-shadow(0 0 5px rgba(106,160,111,0.5));
+}
+.t-c-tl { top: 8px; left: 10px; border-right: none; border-bottom: none; }
+.t-c-tr { top: 8px; right: 10px; border-left: none; border-bottom: none; }
+.t-c-bl { bottom: 8px; left: 10px; border-right: none; border-top: none; }
+.t-c-br { bottom: 8px; right: 10px; border-left: none; border-top: none; }
+
 /* ---- LETTER CONTENT INSIDE MODAL ---- */
 .letter-modal {
+    position: relative;
     padding: 0;
 }
 .letter-header {
@@ -962,6 +1130,9 @@
     .tarjeta-portada { max-width: 300px; padding: 24px 18px; }
     .monograma { width: 70px; height: 70px; }
     .monograma span { font-size: 36px; }
+    .anillo-holograma { width: 90vmin; height: 90vmin; opacity: 0.35; }
+    .portada-sistema { font-size: 9px; padding: 6px 10px; margin-top: 16px; }
+    .letter-topbar { font-size: 8px; letter-spacing: 1px; }
     .letter-counter { gap: 12px; padding: 20px; }
     .letter-body { padding: 20px; }
     .letter-header { padding: 24px 20px 20px; }

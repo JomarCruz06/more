@@ -1,43 +1,43 @@
-function initCursor() {
-    if (App.prefs.reduceMotion || !App.prefs.isDesktop) {
+function iniciarCursor() {
+    if (App.prefs.movimientoReducido || !App.prefs.esEscritorio) {
         App.el.cursorDot.style.display = 'none';
         App.el.cursorRing.style.display = 'none';
         return;
     }
 
-    let mouseX = 0, mouseY = 0;
-    let ringX = 0, ringY = 0;
-    let particleCount = 0;
+    let posX = 0, posY = 0;
+    let anilloX = 0, anilloY = 0;
+    let cantidadParticulas = 0;
 
     document.body.classList.add('hs-cursor-ativo');
 
     document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        App.el.cursorDot.style.left = mouseX - 3 + 'px';
-        App.el.cursorDot.style.top = mouseY - 3 + 'px';
+        posX = e.clientX;
+        posY = e.clientY;
+        App.el.cursorDot.style.left = posX - 3 + 'px';
+        App.el.cursorDot.style.top = posY - 3 + 'px';
 
-        particleCount++;
-        if (particleCount % 4 === 0) {
+        cantidadParticulas++;
+        if (cantidadParticulas % 4 === 0) {
             const p = document.createElement('div');
             p.className = 'cursor-particle';
-            p.style.left = mouseX + 'px';
-            p.style.top = mouseY + 'px';
+            p.style.left = posX + 'px';
+            p.style.top = posY + 'px';
             document.body.appendChild(p);
             setTimeout(() => p.remove(), 500);
         }
     });
 
-    (function animarCursor() {
-        ringX += (mouseX - ringX) * 0.15;
-        ringY += (mouseY - ringY) * 0.15;
-        App.el.cursorRing.style.left = ringX - 16 + 'px';
-        App.el.cursorRing.style.top = ringY - 16 + 'px';
-        requestAnimationFrame(animarCursor);
+    (function animar() {
+        anilloX += (posX - anilloX) * 0.15;
+        anilloY += (posY - anilloY) * 0.15;
+        App.el.cursorRing.style.left = anilloX - 16 + 'px';
+        App.el.cursorRing.style.top = anilloY - 16 + 'px';
+        requestAnimationFrame(animar);
     })();
 
-    document.querySelectorAll('button, a, .tarjeta-portada, .audio-player, .gallery-item').forEach(el => {
-        el.addEventListener('mouseenter', () => App.el.cursorRing.classList.add('hovering'));
-        el.addEventListener('mouseleave', () => App.el.cursorRing.classList.remove('hovering'));
+    document.querySelectorAll('button, a, .tarjeta-portada, .audio-player, .gallery-item').forEach((elemento) => {
+        elemento.addEventListener('mouseenter', () => App.el.cursorRing.classList.add('hovering'));
+        elemento.addEventListener('mouseleave', () => App.el.cursorRing.classList.remove('hovering'));
     });
 }

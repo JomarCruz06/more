@@ -1,36 +1,36 @@
-let ytPlayer = null;
+let reproductorYT = null;
 let intentosAudio = 0;
-let ytScriptAdded = false;
+let scriptYTCargado = false;
 
-function initModalAudio() {
-    const container = document.getElementById('ytAudio');
-    if (!container) return;
+function iniciarAudioModal() {
+    const contenedor = document.getElementById('zonaYoutube');
+    if (!contenedor) return;
 
     if (window.YT && window.YT.Player) {
-        if (ytPlayer) {
-            try { ytPlayer.destroy(); } catch (e) {}
-            ytPlayer = null;
+        if (reproductorYT) {
+            try { reproductorYT.destroy(); } catch (e) {}
+            reproductorYT = null;
         }
-        createYTPlayer();
+        crearReproductorYT();
         return;
     }
 
-    if (!ytScriptAdded) {
-        ytScriptAdded = true;
-        const tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        document.head.appendChild(tag);
-        window.onYouTubeIframeAPIReady = createYTPlayer;
+    if (!scriptYTCargado) {
+        scriptYTCargado = true;
+        const etiqueta = document.createElement('script');
+        etiqueta.src = 'https://www.youtube.com/iframe_api';
+        document.head.appendChild(etiqueta);
+        window.onYouTubeIframeAPIReady = crearReproductorYT;
     }
 }
 
-function createYTPlayer() {
-    const container = document.getElementById('ytAudio');
-    if (!container || !window.YT || !window.YT.Player) return;
+function crearReproductorYT() {
+    const contenedor = document.getElementById('zonaYoutube');
+    if (!contenedor || !window.YT || !window.YT.Player) return;
 
     try {
-        ytPlayer = new YT.Player('ytAudio', {
-            videoId: App.config.YT_VIDEO_ID,
+        reproductorYT = new YT.Player('zonaYoutube', {
+            videoId: App.config.ID_VIDEO_YT,
             playerVars: {
                 autoplay: 0, controls: 0, showinfo: 0,
                 rel: 0, modestbranding: 1, playsinline: 1
@@ -40,48 +40,48 @@ function createYTPlayer() {
             }
         });
     } catch (e) {
-        ytPlayer = null;
+        reproductorYT = null;
     }
 }
 
-function toggleModalAudio() {
-    const player = document.getElementById('modalAudioPlayer');
-    const btn = document.getElementById('modalAudioBtn');
-    const sub = document.getElementById('modalAudioSub');
+function alternarAudioModal() {
+    const reproductorUI = document.getElementById('reproductorModal');
+    const boton = document.getElementById('botonAudio');
+    const subtitulo = document.getElementById('subtituloAudio');
 
-    if (!player) return;
+    if (!reproductorUI) return;
 
-    if (player.classList.contains('playing')) {
-        detenerModalAudio();
+    if (reproductorUI.classList.contains('playing')) {
+        detenerAudioModal();
     } else {
-        if (ytPlayer && ytPlayer.playVideo) {
+        if (reproductorYT && reproductorYT.playVideo) {
             intentosAudio = 0;
-            try { if (ytPlayer.unMute) ytPlayer.unMute(); } catch (e) {}
-            ytPlayer.playVideo();
-            sub.innerHTML = 'Nuestra cancion &#127925;';
-            player.classList.add('playing');
-            btn.innerHTML = '&#10074;&#10074;';
-            btn.classList.add('playing');
-        } else if (intentosAudio < App.config.MAX_AUDIO_RETRIES) {
+            try { if (reproductorYT.unMute) reproductorYT.unMute(); } catch (e) {}
+            reproductorYT.playVideo();
+            subtitulo.innerHTML = 'Nuestra cancion &#127925;';
+            reproductorUI.classList.add('playing');
+            boton.innerHTML = '&#10074;&#10074;';
+            boton.classList.add('playing');
+        } else if (intentosAudio < App.config.MAX_REINTENTOS_AUDIO) {
             intentosAudio++;
-            setTimeout(toggleModalAudio, 200);
+            setTimeout(alternarAudioModal, 200);
         } else {
             mostrarToast('No se pudo cargar la musica', 'warning');
         }
     }
 }
 
-function detenerModalAudio() {
-    const player = document.getElementById('modalAudioPlayer');
-    const btn = document.getElementById('modalAudioBtn');
-    const sub = document.getElementById('modalAudioSub');
+function detenerAudioModal() {
+    const reproductorUI = document.getElementById('reproductorModal');
+    const boton = document.getElementById('botonAudio');
+    const subtitulo = document.getElementById('subtituloAudio');
 
-    try { if (ytPlayer && ytPlayer.pauseVideo) ytPlayer.pauseVideo(); } catch (e) {}
-    if (player) player.classList.remove('playing');
-    if (btn) { btn.innerHTML = '&#9654;'; btn.classList.remove('playing'); }
-    if (sub) sub.innerHTML = 'Toca para escuchar &#10084;';
+    try { if (reproductorYT && reproductorYT.pauseVideo) reproductorYT.pauseVideo(); } catch (e) {}
+    if (reproductorUI) reproductorUI.classList.remove('playing');
+    if (boton) { boton.innerHTML = '&#9654;'; boton.classList.remove('playing'); }
+    if (subtitulo) subtitulo.innerHTML = 'Toca para escuchar &#10084;';
 }
 
-function detenerAudio() {
-    detenerModalAudio();
+function detenerMusica() {
+    detenerAudioModal();
 }

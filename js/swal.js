@@ -2,13 +2,13 @@
    SWEETALERT2 - Sistema completo de modales
    ============================================================ */
 
-function swalBase(opts) {
+function baseSwal(opciones) {
     return Swal.fire({
         customClass: { popup: 'swal-futuristic' },
         showClass: { popup: 'animate__animated animate__fadeInDown' },
         hideClass: { popup: 'animate__animated animate__fadeOutUp' },
         buttonsStyling: false,
-        ...opts,
+        ...opciones,
     });
 }
 
@@ -35,14 +35,12 @@ function mostrarBienvenida() {
         return;
     }
 
-    swalBase({
+    baseSwal({
         title: 'Hola mi vida',
         html: `
             <p>Has abierto esta carta porque significas mucho para mi.</p>
             <p>Disfruta cada palabra, cada foto y nuestra cancion.</p>
-            <p style="margin-top:16px;font-style:italic;opacity:0.5;font-size:0.85em;">
-                &#127807; Con amor &#127807;
-            </p>
+            <p class="bienvenida-firma">&#127807; Con amor &#127807;</p>
         `,
         icon: 'success',
         iconColor: '#4a7c59',
@@ -63,10 +61,10 @@ function abrirCartaModal() {
     Swal.close();
 
     setTimeout(() => {
-        const letterHTML = construirHTMLCarta();
+        const htmlCarta = construirHTMLCarta();
 
-        swalBase({
-            html: letterHTML,
+        baseSwal({
+            html: htmlCarta,
             customClass: { popup: 'swal-futuristic swal-fullscreen' },
             showClass: { popup: 'animate__animated animate__zoomIn' },
             hideClass: { popup: 'animate__animated animate__fadeOut' },
@@ -76,16 +74,16 @@ function abrirCartaModal() {
             allowOutsideClick: false,
             allowEscapeKey: false,
             didOpen: () => {
-                initCounter();
-                initModalAudio();
-                setupCloseButton();
-                setupCarousel();
+                iniciarContador();
+                iniciarAudioModal();
+                configurarBotonCerrar();
+                configurarCarrusel();
             },
             willClose: () => {
-                detenerModalAudio();
-                detenerCounter();
-                clearInterval(modalCarouselTimer);
-                modalCarouselTimer = null;
+                detenerAudioModal();
+                detenerContador();
+                clearInterval(temporizadorCarrusel);
+                temporizadorCarrusel = null;
             },
         });
     }, 350);
@@ -95,6 +93,19 @@ function abrirCartaModal() {
 function construirHTMLCarta() {
     return `
     <div class="letter-modal">
+
+        <div class="letter-topbar">
+            <span class="topbar-punto"></span>
+            <span>PENSAMIENTOS CIFRADAOS · v3.0</span>
+            <span class="topbar-estado">VINCULO SEGURO</span>
+        </div>
+
+        <div class="tech-corners" aria-hidden="true">
+            <span class="t-corner t-c-tl"></span>
+            <span class="t-corner t-c-tr"></span>
+            <span class="t-corner t-c-bl"></span>
+            <span class="t-corner t-c-br"></span>
+        </div>
 
         <div class="letter-header">
             <div class="letter-header-icon">
@@ -127,7 +138,7 @@ function construirHTMLCarta() {
 
         <div class="letter-gallery">
             <div class="carousel-wrapper">
-                <div class="carousel-track" id="modalCarouselTrack">
+                <div class="carousel-track" id="pistaCarrusel">
                     <div class="carousel-slide">
                         <div class="gallery-item" onclick="abrirLightbox('oto/mor.jpeg','Los dos juntos, siempre')">
                             <img src="oto/mor.jpeg" alt="Foto juntos" loading="lazy">
@@ -147,21 +158,21 @@ function construirHTMLCarta() {
                         </div>
                     </div>
                 </div>
-                <button class="carousel-btn carousel-btn-prev" onclick="modalCarouselPrev()">&#10094;</button>
-                <button class="carousel-btn carousel-btn-next" onclick="modalCarouselNext()">&#10095;</button>
-                <div class="carousel-dots" id="modalCarouselDots">
-                    <div class="carousel-dot active" data-slide="0" onclick="modalCarouselGo(0)"></div>
-                    <div class="carousel-dot" data-slide="1" onclick="modalCarouselGo(1)"></div>
+                <button class="carousel-btn carousel-btn-prev" onclick="carruselAnterior()">&#10094;</button>
+                <button class="carousel-btn carousel-btn-next" onclick="carruselSiguiente()">&#10095;</button>
+                <div class="carousel-dots" id="puntosCarrusel">
+                    <div class="carousel-dot active" data-slide="0" onclick="carruselIrA(0)"></div>
+                    <div class="carousel-dot" data-slide="1" onclick="carruselIrA(1)"></div>
                 </div>
             </div>
         </div>
 
         <div class="letter-audio">
-            <div class="audio-player" id="modalAudioPlayer" onclick="toggleModalAudio()">
-                <div class="audio-btn" id="modalAudioBtn">&#9654;</div>
+            <div class="audio-player" id="reproductorModal" onclick="alternarAudioModal()">
+                <div class="audio-btn" id="botonAudio">&#9654;</div>
                 <div class="audio-info">
                     <div class="audio-title">Nuestra cancion</div>
-                    <div class="audio-sub" id="modalAudioSub">Toca para escuchar &#10084;</div>
+                    <div class="audio-sub" id="subtituloAudio">Toca para escuchar &#10084;</div>
                 </div>
                 <div class="audio-bars">
                     <span style="height:4px"></span>
@@ -171,7 +182,7 @@ function construirHTMLCarta() {
                     <span style="height:4px"></span>
                 </div>
             </div>
-            <div id="ytAudio" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;" aria-hidden="true"></div>
+            <div id="zonaYoutube" style="position:absolute;width:1px;height:1px;opacity:0;pointer-events:none;" aria-hidden="true"></div>
         </div>
 
         <div class="letter-body">
@@ -202,46 +213,46 @@ function construirHTMLCarta() {
     `;
 }
 
-/* ---- CAROUSEL ---- */
-let modalSlideActual = 0;
-const modalTotalSlides = 2;
-let modalCarouselTimer = null;
+/* ---- CARRUSEL ---- */
+let diapositivaActual = 0;
+const totalDiapositivas = 2;
+let temporizadorCarrusel = null;
 
-function setupCarousel() {
-    modalSlideActual = 0;
-    updateCarousel();
-    clearInterval(modalCarouselTimer);
-    modalCarouselTimer = setInterval(() => modalCarouselNext(), 5000);
+function configurarCarrusel() {
+    diapositivaActual = 0;
+    actualizarCarrusel();
+    clearInterval(temporizadorCarrusel);
+    temporizadorCarrusel = setInterval(() => carruselSiguiente(), App.config.INTERVALO_CARRUSEL);
 }
 
-function modalCarouselGo(n) {
-    modalSlideActual = ((n % modalTotalSlides) + modalTotalSlides) % modalTotalSlides;
-    updateCarousel();
-    clearInterval(modalCarouselTimer);
-    modalCarouselTimer = setInterval(() => modalCarouselNext(), 5000);
+function carruselIrA(n) {
+    diapositivaActual = ((n % totalDiapositivas) + totalDiapositivas) % totalDiapositivas;
+    actualizarCarrusel();
+    clearInterval(temporizadorCarrusel);
+    temporizadorCarrusel = setInterval(() => carruselSiguiente(), App.config.INTERVALO_CARRUSEL);
 }
 
-function modalCarouselNext() {
-    modalCarouselGo(modalSlideActual + 1);
+function carruselSiguiente() {
+    carruselIrA(diapositivaActual + 1);
 }
 
-function modalCarouselPrev() {
-    modalCarouselGo(modalSlideActual - 1);
+function carruselAnterior() {
+    carruselIrA(diapositivaActual - 1);
 }
 
-function updateCarousel() {
-    const track = document.getElementById('modalCarouselTrack');
-    const dots = document.querySelectorAll('#modalCarouselDots .carousel-dot');
-    if (!track) return;
-    track.style.transform = `translateX(-${modalSlideActual * 100}%)`;
-    dots.forEach((d, i) => d.classList.toggle('active', i === modalSlideActual));
+function actualizarCarrusel() {
+    const pista = document.getElementById('pistaCarrusel');
+    const puntos = document.querySelectorAll('#puntosCarrusel .carousel-dot');
+    if (!pista) return;
+    pista.style.transform = `translateX(-${diapositivaActual * 100}%)`;
+    puntos.forEach((punto, i) => punto.classList.toggle('active', i === diapositivaActual));
 }
 
 /* ---- INTERCEPTAR BOTON CERRAR ---- */
-function setupCloseButton() {
-    const closeBtn = document.querySelector('.swal-fullscreen .swal2-close');
-    if (closeBtn) {
-        closeBtn.addEventListener('click', (e) => {
+function configurarBotonCerrar() {
+    const botonCerrar = document.querySelector('.swal-fullscreen .swal2-close');
+    if (botonCerrar) {
+        botonCerrar.addEventListener('click', (e) => {
             e.preventDefault();
             e.stopPropagation();
             confirmarCerrarCarta();
@@ -257,7 +268,7 @@ function confirmarCerrarCarta() {
         return;
     }
 
-    swalBase({
+    baseSwal({
         title: 'Volver a la portada?',
         html: '<p style="margin:8px 0 0;">Podras leer la carta de nuevo cuando quieras.</p>',
         icon: 'question',
@@ -268,12 +279,12 @@ function confirmarCerrarCarta() {
         customClass: { popup: 'swal-futuristic swal-confirm' },
         allowOutsideClick: false,
         allowEscapeKey: false,
-    }).then((result) => {
-        if (result.isConfirmed) {
+    }).then((resultado) => {
+        if (resultado.isConfirmed) {
             Swal.close();
             App.el.portada.classList.remove('abriendo', 'oculto');
         }
-        if (result.isDismissed) {
+        if (resultado.isDismissed) {
             /* Volver a mostrar la carta modal si cancelo */
             abrirCartaModal();
         }

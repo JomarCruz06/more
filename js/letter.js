@@ -1,7 +1,7 @@
-function initLetter() {
+function iniciarCarta() {
     App.el.tarjetaPortada.addEventListener('click', () => {
-        const rect = App.el.tarjetaPortada.getBoundingClientRect();
-        explotarCorazones(rect.left + rect.width / 2, rect.top + rect.height / 2);
+        const area = App.el.tarjetaPortada.getBoundingClientRect();
+        explotarCorazones(area.left + area.width / 2, area.top + area.height / 2);
 
         App.el.portada.classList.add('abriendo');
         setTimeout(() => {

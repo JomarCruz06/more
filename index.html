@@ -7,6 +7,10 @@
     <meta name="theme-color" content="#060a14">
     <title>Para ti, mi amor</title>
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" href="favicon.svg">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,6 +76,8 @@
         <div class="loader-ring"></div>
         <div class="loader-text">Preparando algo especial</div>
         <div class="loader-bar"><div class="loader-bar-fill"></div></div>
+        <div class="loader-porcentaje" id="loaderPorcentaje">0%</div>
+        <div class="loader-log" id="loaderLog">&gt; inicializando nucleo...</div>
     </div>
 
     <!-- ============ CURSOR ============ -->
@@ -88,6 +94,9 @@
         <div class="aurora-blob aurora-3"></div>
     </div>
 
+    <!-- ============ NEURAL GRID ============ -->
+    <div class="rejilla-ia" aria-hidden="true"></div>
+
     <!-- ============ LAYERS ============ -->
     <div id="capa-particulas" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
     <div id="capa-corazones" class="fixed inset-0 pointer-events-none z-0 overflow-hidden"></div>
@@ -95,6 +104,8 @@
 
     <!-- ============ PORTADA ============ -->
     <div class="portada" id="portada">
+
+        <div class="anillo-holograma" aria-hidden="true"></div>
 
         <svg class="hoja animate-flotar-hoja" style="position:absolute; left:8%; top:12%; width:clamp(40px,8vw,56px); transform:rotate(-18deg);" viewBox="0 0 40 40">
             <defs><linearGradient id="h1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#6aa06f" /><stop offset="100%" stop-color="#2f5d3a" /></linearGradient></defs>
@@ -114,6 +125,8 @@
         </svg>
 
         <div class="tarjeta-portada" id="tarjetaPortada" role="button" tabindex="0" aria-label="Abrir la carta">
+
+            <div class="holografia" aria-hidden="true"></div>
 
             <div class="tarjeta-hud" aria-hidden="true">
                 <span class="hud-corner hud-c-tl"></span>
@@ -143,6 +156,11 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 5v14M5 12l7 7 7-7"/>
                 </svg>
+            </div>
+
+            <div class="portada-sistema" aria-hidden="true">
+                <span class="sistema-punto"></span>
+                <span id="sistemaTexto">&gt; modulo afecto: 100% activo</span>
             </div>
         </div>
     </div>

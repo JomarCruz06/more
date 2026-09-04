@@ -1,8 +1,8 @@
-function initProgressBar() {
+function iniciarBarraProgreso() {
     window.addEventListener('scroll', () => {
-        const scrollTop = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-        App.el.progressBar.style.width = progress + '%';
+        const desplazamiento = window.scrollY;
+        const alturaDoc = document.documentElement.scrollHeight - window.innerHeight;
+        const progreso = alturaDoc > 0 ? (desplazamiento / alturaDoc) * 100 : 0;
+        App.el.progressBar.style.width = progreso + '%';
     });
 }
