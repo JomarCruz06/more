@@ -6,17 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="theme-color" content="#0a0f1a">
     <title>Para ti, mi amor</title>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Great+Vibes&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap"
         rel="stylesheet">
+
+    <!-- Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css">
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="css/components.css">
     <style type="text/tailwindcss">
         @theme {
             --color-verde: #2f5d3a;
@@ -139,229 +147,6 @@
                 body { padding: max(10px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
             }
         }
-
-        /* ---- loader ---- */
-        #loader {
-            position: fixed; inset: 0; z-index: 9999;
-            background: #0a0f1a;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-        #loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-        .loader-ring {
-            width: 90px; height: 90px; border-radius: 50%;
-            border: 2px solid rgba(184,147,90,0.15);
-            border-top-color: #b8935a;
-            animation: loader-ring 1.2s linear infinite;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .loader-ring::after {
-            content: 'J'; font-family: 'Great Vibes', cursive;
-            font-size: 36px; color: #e3c896;
-            animation: loader-pulse 1.5s ease-in-out infinite;
-        }
-        .loader-text {
-            margin-top: 20px; font-family: 'Cormorant Garamond', serif;
-            color: rgba(215,228,201,0.5); font-size: 13px; letter-spacing: 3px;
-            text-transform: uppercase;
-        }
-
-        /* ---- cursor personalizado ---- */
-        #cursor-dot {
-            position: fixed; width: 8px; height: 8px; border-radius: 50%;
-            background: #e3c896; pointer-events: none; z-index: 9998;
-            transition: transform 0.1s ease;
-        }
-        #cursor-ring {
-            position: fixed; width: 36px; height: 36px; border-radius: 50%;
-            border: 1.5px solid rgba(184,147,90,0.4); pointer-events: none; z-index: 9997;
-        }
-        #cursor-ring.hovering {
-            width: 56px; height: 56px; border-color: rgba(106,160,111,0.6);
-        }
-        .cursor-particle {
-            position: fixed; width: 4px; height: 4px; border-radius: 50%;
-            pointer-events: none; z-index: 9996;
-            background: radial-gradient(circle, rgba(184,147,90,0.7), transparent);
-            animation: cursor-fade 0.6s ease-out forwards;
-        }
-        @keyframes cursor-fade {
-            from { opacity: 1; transform: scale(1); }
-            to { opacity: 0; transform: scale(0); }
-        }
-
-        /* ---- barra de progreso ---- */
-        #progress-bar {
-            position: fixed; top: 0; left: 0; height: 2px; z-index: 9990;
-            background: linear-gradient(90deg, #4a7c59, #b8935a, #e3c896);
-            width: 0%; transition: width 0.1s ease;
-            box-shadow: 0 0 10px rgba(184,147,90,0.4);
-        }
-
-        /* ---- aurora boreal ---- */
-        .aurora-blob {
-            position: absolute; border-radius: 50%; filter: blur(80px);
-            opacity: 0.12; pointer-events: none;
-        }
-        .aurora-1 {
-            width: 50vw; height: 50vw; top: -10%; left: -10%;
-            background: radial-gradient(circle, rgba(74,124,89,0.6), transparent 70%);
-            animation: aurora 20s ease-in-out infinite;
-        }
-        .aurora-2 {
-            width: 40vw; height: 40vw; bottom: -5%; right: -5%;
-            background: radial-gradient(circle, rgba(184,147,90,0.4), transparent 70%);
-            animation: aurora2 25s ease-in-out infinite;
-        }
-        .aurora-3 {
-            width: 35vw; height: 35vw; top: 30%; right: 10%;
-            background: radial-gradient(circle, rgba(45,93,58,0.35), transparent 70%);
-            animation: aurora 18s ease-in-out infinite reverse;
-        }
-
-        /* ---- textura de papel ---- */
-        .carta::before {
-            content: ""; position: absolute; inset: 0;
-            background-image: radial-gradient(rgba(47,93,58,0.03) 1px, transparent 1px), radial-gradient(rgba(184,147,90,0.04) 1px, transparent 1px);
-            background-size: 3px 3px, 5px 5px; background-position: 0 0, 2px 2px;
-            pointer-events: none; border-radius: 4px;
-        }
-        .carta::after {
-            content: ""; position: absolute; inset: 0; border-radius: 4px;
-            box-shadow: inset 0 0 100px rgba(47,93,58,0.06), inset 0 0 4px rgba(0,0,0,0.1);
-            pointer-events: none;
-        }
-
-        /* ---- btn repetir ---- */
-        .btn-repetir::after {
-            content: ""; position: absolute; top: -50%; left: -60%;
-            width: 40%; height: 200%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
-            transform: skewX(-20deg); transition: left .6s ease;
-        }
-        .btn-repetir:hover::after { left: 120%; }
-
-        /* ---- hojas ---- */
-        .hoja { filter: drop-shadow(0 8px 16px rgba(0,0,0,0.35)); }
-
-        /* ---- foto marco ---- */
-        .foto-marco { position: relative; }
-        .foto-marco::before {
-            content: ''; position: absolute; inset: -4px; border-radius: 6px;
-            background: linear-gradient(135deg, rgba(184,147,90,0.3), rgba(74,124,89,0.2), rgba(184,147,90,0.3));
-            z-index: -1; opacity: 0; transition: opacity 0.5s ease;
-        }
-        .foto-marco:hover::before { opacity: 1; }
-
-        /* ---- carousel ---- */
-        .carousel-track {
-            display: flex; transition: transform 0.5s cubic-bezier(.4,1.6,.5,1);
-        }
-        .carousel-slide { min-width: 100%; }
-        .carousel-dot {
-            width: 8px; height: 8px; border-radius: 50%;
-            background: rgba(184,147,90,0.3); transition: all 0.3s ease; cursor: pointer;
-        }
-        .carousel-dot.active {
-            background: #b8935a; width: 24px; border-radius: 4px;
-        }
-
-        /* ---- reproductor ---- */
-        .reproductor-fondo {
-            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(184,147,90,0.2);
-        }
-        .reproductor.playing .reproductor-icono {
-            background: var(--color-dorado-claro);
-            animation: pulso-play 1.2s ease-in-out infinite;
-        }
-        .reproductor.playing .reproductor-ondas span { animation: onda 1s ease-in-out infinite; }
-        .reproductor.playing .reproductor-ondas span:nth-child(1) { animation-delay: 0s; }
-        .reproductor.playing .reproductor-ondas span:nth-child(2) { animation-delay: .15s; }
-        .reproductor.playing .reproductor-ondas span:nth-child(3) { animation-delay: .3s; }
-        .reproductor.playing .reproductor-ondas span:nth-child(4) { animation-delay: .45s; }
-        .reproductor.playing .reproductor-ondas span:nth-child(5) { animation-delay: .6s; }
-
-        /* ---- monograma ---- */
-        .monograma {
-            width: 80px; height: 80px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            background: linear-gradient(135deg, rgba(184,147,90,0.15), rgba(74,124,89,0.1));
-            border: 1.5px solid rgba(184,147,90,0.35);
-            box-shadow: 0 0 30px rgba(184,147,90,0.12), 0 0 60px rgba(74,124,89,0.06);
-            animation: glow-ring 2.5s ease-in-out infinite;
-        }
-
-        /* ---- partículas ---- */
-        .particle {
-            position: absolute; border-radius: 50%; pointer-events: none;
-            animation: pulse-dot 4s ease-in-out infinite;
-        }
-
-        /* ---- parallax párrafos ---- */
-        .parrafo-reveal {
-            opacity: 0; transform: translateY(30px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
-        .parrafo-reveal.visible {
-            opacity: 1; transform: translateY(0);
-        }
-
-        /* ---- contador ---- */
-        .contador-item {
-            display: flex; flex-direction: column; align-items: center;
-            min-width: 60px;
-        }
-        .contador-num {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(28px, 6vw, 38px); font-weight: 700;
-            color: #b8935a;
-            background: linear-gradient(135deg, #b8935a, #e3c896);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text; line-height: 1;
-        }
-        .contador-label {
-            font-size: clamp(9px, 2vw, 11px); color: rgba(157,181,165,0.7);
-            text-transform: uppercase; letter-spacing: 1.5px; margin-top: 4px;
-        }
-
-        /* ---- controles ---- */
-        .portada.oculto { display: none; }
-        .portada.abriendo .tarjeta-portada {
-            scale: 1.08; rotate: y 12deg; opacity: 0;
-            transition-duration: 650ms; transition-timing-function: cubic-bezier(.4,1.6,.5,1);
-        }
-        .portada.abriendo .hoja { opacity: 0; translate: 0 -40px; scale: .4; }
-
-        .carta.visible {
-            opacity: 1; translate: 0 0; scale: 1;
-            pointer-events: auto; max-height: none; overflow: visible;
-            box-shadow: 0 40px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(184,147,90,0.3), 0 0 80px rgba(74,124,89,0.06);
-        }
-        .carta.visible .encabezado { opacity: 1; translate: 0 0; }
-        .carta.visible .foto-marco { opacity: 1; }
-        .carta.visible .reproductor { opacity: 1; translate: 0 0; }
-        .carta.visible .sello {
-            opacity: .85; scale: 1; rotate: 0deg; transition-delay: 2.2s;
-        }
-
-        .cuerpo p { overflow-wrap: break-word; }
-
-        @media (max-width: 360px) { .monograma { width: 60px; height: 60px; } }
-        @media (max-height: 600px) and (orientation: landscape) { .monograma { width: 64px; height: 64px; } }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-            .carta, .encabezado, .foto-marco, .reproductor, .cuerpo p, .firma, .separador {
-                opacity: 1 !important; translate: none !important; scale: none !important;
-                transform: none !important; max-height: none !important;
-            }
-            .portada { display: none; }
-            .carta { pointer-events: auto; }
-            #cursor-dot, #cursor-ring { display: none !important; }
-            body { cursor: auto !important; }
-            body * { cursor: auto !important; }
-        }
     </style>
 </head>
 
@@ -387,7 +172,7 @@
         <div class="aurora-blob aurora-3"></div>
     </div>
 
-    <!-- líneas topográficas sutiles -->
+    <!-- lineas topograficas sutiles -->
     <svg class="fixed inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1000 700"
         preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <g fill="none" stroke="#e3c896" stroke-width="1.2" opacity="0.03">
@@ -407,23 +192,47 @@
         <div class="portada relative w-full max-w-[430px] max-[480px]:max-w-[330px] short-landscape:max-w-[370px] mx-auto flex items-center justify-center animate-caer-portada"
             id="portada">
 
-            <svg class="hoja absolute z-0 animate-flotar-hoja -left-[11%] top-[5%] w-[clamp(54px,12vw,74px)] max-[480px]:w-[clamp(40px,10vw,54px)] max-[480px]:-left-[6%] rotate-[-18deg]" viewBox="0 0 40 40">
-                <defs><linearGradient id="h1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#6aa06f" /><stop offset="100%" stop-color="#2f5d3a" /></linearGradient></defs>
+            <svg class="hoja absolute z-0 animate-flotar-hoja -left-[11%] top-[5%] w-[clamp(54px,12vw,74px)] max-[480px]:w-[clamp(40px,10vw,54px)] max-[480px]:-left-[6%] rotate-[-18deg]"
+                viewBox="0 0 40 40">
+                <defs>
+                    <linearGradient id="h1" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#6aa06f" />
+                        <stop offset="100%" stop-color="#2f5d3a" />
+                    </linearGradient>
+                </defs>
                 <path d="M20 2 C 31 11, 34 26, 20 38 C 6 26, 9 11, 20 2 Z" fill="url(#h1)" />
                 <path d="M20 2 C 20 14, 20 26, 20 38" stroke="#e3c896" stroke-width="1" fill="none" opacity=".5" />
             </svg>
-            <svg class="hoja absolute z-0 animate-flotar-hoja left-[4%] bottom-[3%] w-[clamp(38px,8.5vw,52px)] rotate-[24deg] [animation-delay:1.2s]" viewBox="0 0 40 40">
-                <defs><linearGradient id="h2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#9db5a5" /><stop offset="100%" stop-color="#4a7c59" /></linearGradient></defs>
+            <svg class="hoja absolute z-0 animate-flotar-hoja left-[4%] bottom-[3%] w-[clamp(38px,8.5vw,52px)] rotate-[24deg] [animation-delay:1.2s]"
+                viewBox="0 0 40 40">
+                <defs>
+                    <linearGradient id="h2" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#9db5a5" />
+                        <stop offset="100%" stop-color="#4a7c59" />
+                    </linearGradient>
+                </defs>
                 <path d="M20 2 C 31 11, 34 26, 20 38 C 6 26, 9 11, 20 2 Z" fill="url(#h2)" />
                 <path d="M20 2 C 20 14, 20 26, 20 38" stroke="#e3c896" stroke-width="1" fill="none" opacity=".5" />
             </svg>
-            <svg class="hoja absolute z-0 animate-flotar-hoja -right-[11%] top-[4%] w-[clamp(54px,12vw,74px)] max-[480px]:w-[clamp(40px,10vw,54px)] max-[480px]:-right-[6%] rotate-[20deg] [animation-delay:600ms]" viewBox="0 0 40 40">
-                <defs><linearGradient id="h3" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#4a7c59" /><stop offset="100%" stop-color="#163024" /></linearGradient></defs>
+            <svg class="hoja absolute z-0 animate-flotar-hoja -right-[11%] top-[4%] w-[clamp(54px,12vw,74px)] max-[480px]:w-[clamp(40px,10vw,54px)] max-[480px]:-right-[6%] rotate-[20deg] [animation-delay:600ms]"
+                viewBox="0 0 40 40">
+                <defs>
+                    <linearGradient id="h3" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#4a7c59" />
+                        <stop offset="100%" stop-color="#163024" />
+                    </linearGradient>
+                </defs>
                 <path d="M20 2 C 31 11, 34 26, 20 38 C 6 26, 9 11, 20 2 Z" fill="url(#h3)" />
                 <path d="M20 2 C 20 14, 20 26, 20 38" stroke="#e3c896" stroke-width="1" fill="none" opacity=".5" />
             </svg>
-            <svg class="hoja absolute z-0 animate-flotar-hoja right-[4%] bottom-[5%] w-[clamp(36px,8vw,48px)] rotate-[-28deg] [animation-delay:1.8s]" viewBox="0 0 40 40">
-                <defs><linearGradient id="h4" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#9db5a5" /><stop offset="100%" stop-color="#2f5d3a" /></linearGradient></defs>
+            <svg class="hoja absolute z-0 animate-flotar-hoja right-[4%] bottom-[5%] w-[clamp(36px,8vw,48px)] rotate-[-28deg] [animation-delay:1.8s]"
+                viewBox="0 0 40 40">
+                <defs>
+                    <linearGradient id="h4" x1="0" y1="0" x2="1" y2="1">
+                        <stop offset="0%" stop-color="#9db5a5" />
+                        <stop offset="100%" stop-color="#2f5d3a" />
+                    </linearGradient>
+                </defs>
                 <path d="M20 2 C 31 11, 34 26, 20 38 C 6 26, 9 11, 20 2 Z" fill="url(#h4)" />
                 <path d="M20 2 C 20 14, 20 26, 20 38" stroke="#e3c896" stroke-width="1" fill="none" opacity=".5" />
             </svg>
@@ -431,40 +240,80 @@
             <div class="tarjeta-portada relative z-[2] w-full aspect-[4/5] max-[480px]:aspect-[3/4] short-landscape:aspect-[5/4] rounded-[20px] cursor-none flex flex-col items-center justify-center text-center px-5 py-6 max-[480px]:px-4 max-[480px]:py-5 transition-all duration-600 ease-[cubic-bezier(.4,1.6,.5,1)] overflow-hidden hover:scale-[1.025] hover:-rotate-[0.3deg] active:scale-[0.97]"
                 id="tarjetaPortada" role="button" tabindex="0" aria-label="Abrir la carta">
 
-                <div class="absolute inset-0 bg-gradient-to-br from-[rgba(250,246,236,0.88)] via-[rgba(240,230,207,0.82)] to-[rgba(215,228,201,0.78)] backdrop-blur-[20px]"></div>
-                <img class="absolute inset-0 z-0 w-full h-full object-cover opacity-[0.18] sepia-[15%] saturate-[0.8] mix-blend-multiply" src="oto/more.jpeg" alt="" aria-hidden="true">
-                <div class="absolute inset-0 z-[3] rounded-[20px] pointer-events-none border border-[rgba(184,147,90,0.3)] shadow-[inset_0_0_30px_rgba(184,147,90,0.08)]"></div>
+                <div
+                    class="absolute inset-0 bg-gradient-to-br from-[rgba(250,246,236,0.88)] via-[rgba(240,230,207,0.82)] to-[rgba(215,228,201,0.78)] backdrop-blur-[20px]">
+                </div>
+                <img class="absolute inset-0 z-0 w-full h-full object-cover opacity-[0.18] sepia-[15%] saturate-[0.8] mix-blend-multiply"
+                    src="oto/more.jpeg" alt="" aria-hidden="true">
+                <div
+                    class="absolute inset-0 z-[3] rounded-[20px] pointer-events-none border border-[rgba(184,147,90,0.3)] shadow-[inset_0_0_30px_rgba(184,147,90,0.08)]">
+                </div>
 
-                <div class="esquina tl absolute top-3 left-3 w-[clamp(24px,5vw,36px)] h-[clamp(24px,5vw,36px)] text-dorado opacity-60 z-[1]">
-                    <svg class="w-full h-full block" viewBox="0 0 60 60"><path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" /><path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor" opacity=".6" /><circle cx="35" cy="9" r="2.5" fill="currentColor" /></svg>
+                <div
+                    class="esquina tl absolute top-3 left-3 w-[clamp(24px,5vw,36px)] h-[clamp(24px,5vw,36px)] text-dorado opacity-60 z-[1]">
+                    <svg class="w-full h-full block" viewBox="0 0 60 60">
+                        <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.5" fill="none"
+                            stroke-linecap="round" />
+                        <path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor"
+                            opacity=".6" />
+                        <circle cx="35" cy="9" r="2.5" fill="currentColor" />
+                    </svg>
                 </div>
-                <div class="esquina tr absolute top-3 right-3 w-[clamp(24px,5vw,36px)] h-[clamp(24px,5vw,36px)] text-dorado opacity-60 z-[1] -scale-x-100">
-                    <svg class="w-full h-full block" viewBox="0 0 60 60"><path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" /><path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor" opacity=".6" /><circle cx="35" cy="9" r="2.5" fill="currentColor" /></svg>
+                <div
+                    class="esquina tr absolute top-3 right-3 w-[clamp(24px,5vw,36px)] h-[clamp(24px,5vw,36px)] text-dorado opacity-60 z-[1] -scale-x-100">
+                    <svg class="w-full h-full block" viewBox="0 0 60 60">
+                        <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.5" fill="none"
+                            stroke-linecap="round" />
+                        <path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor"
+                            opacity=".6" />
+                        <circle cx="35" cy="9" r="2.5" fill="currentColor" />
+                    </svg>
                 </div>
-                <div class="esquina bl absolute bottom-3 left-3 w-[clamp(24px,5vw,36px)] h-[clamp(24px,5vw,36px)] text-dorado opacity-60 z-[1] -scale-y-100">
-                    <svg class="w-full h-full block" viewBox="0 0 60 60"><path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" /><path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor" opacity=".6" /><circle cx="35" cy="9" r="2.5" fill="currentColor" /></svg>
+                <div
+                    class="esquina bl absolute bottom-3 left-3 w-[clamp(24px,5vw,36px)] h-[clamp(24px,5vw,36px)] text-dorado opacity-60 z-[1] -scale-y-100">
+                    <svg class="w-full h-full block" viewBox="0 0 60 60">
+                        <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.5" fill="none"
+                            stroke-linecap="round" />
+                        <path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor"
+                            opacity=".6" />
+                        <circle cx="35" cy="9" r="2.5" fill="currentColor" />
+                    </svg>
                 </div>
-                <div class="esquina br absolute bottom-3 right-3 w-[clamp(24px,5vw,36px)] h-[clamp(24px,5vw,36px)] text-dorado opacity-60 z-[1] -scale-x-100 -scale-y-100">
-                    <svg class="w-full h-full block" viewBox="0 0 60 60"><path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" /><path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor" opacity=".6" /><circle cx="35" cy="9" r="2.5" fill="currentColor" /></svg>
+                <div
+                    class="esquina br absolute bottom-3 right-3 w-[clamp(24px,5vw,36px)] h-[clamp(24px,5vw,36px)] text-dorado opacity-60 z-[1] -scale-x-100 -scale-y-100">
+                    <svg class="w-full h-full block" viewBox="0 0 60 60">
+                        <path d="M2 58 C 2 26, 14 10, 46 2" stroke="currentColor" stroke-width="1.5" fill="none"
+                            stroke-linecap="round" />
+                        <path d="M12 30 C 20 26, 27 26, 33 29 C 27 35, 18 36, 12 30 Z" fill="currentColor"
+                            opacity=".6" />
+                        <circle cx="35" cy="9" r="2.5" fill="currentColor" />
+                    </svg>
                 </div>
 
                 <div class="monograma relative z-[1] mb-4">
                     <span class="font-script text-[clamp(32px,8vw,42px)] text-dorado leading-none">J</span>
                 </div>
 
-                <h2 class="font-script relative z-[1] font-normal text-[clamp(28px,7.5vw,40px)] max-[480px]:text-[clamp(24px,7vw,34px)] text-verde mb-1 leading-[1.15]">
+                <h2
+                    class="font-script relative z-[1] font-normal text-[clamp(28px,7.5vw,40px)] max-[480px]:text-[clamp(24px,7vw,34px)] text-verde mb-1 leading-[1.15]">
                     Para Ti,<br>mi vida</h2>
-                <div class="font-script relative z-[1] text-[clamp(32px,8.5vw,46px)] max-[480px]:text-[clamp(26px,7.5vw,38px)] leading-none mt-0.5 text-dorado">
+                <div
+                    class="font-script relative z-[1] text-[clamp(32px,8.5vw,46px)] max-[480px]:text-[clamp(26px,7.5vw,38px)] leading-none mt-0.5 text-dorado">
                     Lisbeth</div>
 
-                <div class="mt-4 relative z-[1] inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[rgba(47,93,58,0.1)] border border-[rgba(47,93,58,0.25)] backdrop-blur-[8px] shadow-[0_2px_12px_rgba(0,0,0,0.08)] animate-pulso">
+                <div
+                    class="mt-4 relative z-[1] inline-flex items-center gap-1.5 px-5 py-2 rounded-full bg-[rgba(47,93,58,0.1)] border border-[rgba(47,93,58,0.25)] backdrop-blur-[8px] shadow-[0_2px_12px_rgba(0,0,0,0.08)] animate-pulso">
                     <span class="text-verde text-[clamp(13px,3vw,15px)]">&#127807;</span>
-                    <span class="text-verde text-[clamp(10px,2.4vw,12px)] tracking-[1.2px] uppercase font-bold">Futura Ingeniera Ambiental</span>
+                    <span class="text-verde text-[clamp(10px,2.4vw,12px)] tracking-[1.2px] uppercase font-bold">Futura
+                        Ingeniera Ambiental</span>
                 </div>
 
-                <p class="mt-3 relative z-[1] italic text-[clamp(12px,2.8vw,14px)] text-verde-oscuro font-semibold [text-shadow:0_1px_4px_rgba(250,246,236,0.9)] min-h-[20px]"><span id="textoTipo"></span></p>
+                <p
+                    class="mt-3 relative z-[1] italic text-[clamp(12px,2.8vw,14px)] text-verde-oscuro font-semibold [text-shadow:0_1px_4px_rgba(250,246,236,0.9)] min-h-[20px]">
+                    <span id="textoTipo"></span></p>
 
-                <p class="toque relative z-[1] mt-[14px] tracking-[0.6px] text-verde-oscuro font-semibold [text-shadow:0_1px_4px_rgba(250,246,236,0.9)] text-[clamp(12.5px,3vw,14.5px)] animate-pulso">
+                <p
+                    class="toque relative z-[1] mt-[14px] tracking-[0.6px] text-verde-oscuro font-semibold [text-shadow:0_1px_4px_rgba(250,246,236,0.9)] text-[clamp(12.5px,3vw,14.5px)] animate-pulso">
                     Toca la carta para leer &#10084;</p>
             </div>
         </div>
@@ -473,19 +322,26 @@
         <div class="carta relative bg-[rgba(250,246,236,0.95)] backdrop-blur-[12px] rounded-[6px] p-[clamp(30px,7vw,56px)_clamp(22px,6vw,52px)_clamp(30px,6vw,46px)] max-[480px]:p-[clamp(22px,5vw,36px)_clamp(16px,4vw,28px)_clamp(22px,5vw,32px)] shadow-[0_40px_80px_rgba(0,0,0,0.55),0_0_0_1px_rgba(184,147,90,0.3)] opacity-0 translate-y-10 scale-[.97] pointer-events-none max-h-0 overflow-hidden transition-all duration-[800ms] ease-[cubic-bezier(.2,.8,.25,1)]"
             id="carta">
 
-            <div class="absolute top-0 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-dorado/40 to-transparent"></div>
+            <div
+                class="absolute top-0 left-[10%] right-[10%] h-px bg-gradient-to-r from-transparent via-dorado/40 to-transparent">
+            </div>
 
             <div class="contenido relative z-[2]">
 
-                <div class="encabezado text-center mb-[clamp(20px,5vw,30px)] opacity-0 translate-y-3.5 transition-all duration-[800ms] delay-[150ms] ease-out">
+                <div
+                    class="encabezado text-center mb-[clamp(20px,5vw,30px)] opacity-0 translate-y-3.5 transition-all duration-[800ms] delay-[150ms] ease-out">
                     <div class="flex items-center justify-center gap-2.5 mb-3">
-                        <span class="h-px w-[50px] bg-gradient-to-r from-transparent via-dorado/50 to-transparent"></span>
+                        <span
+                            class="h-px w-[50px] bg-gradient-to-r from-transparent via-dorado/50 to-transparent"></span>
                         <span class="text-verde text-sm">&#127807;</span>
-                        <span class="h-px w-[50px] bg-gradient-to-r from-transparent via-dorado/50 to-transparent"></span>
+                        <span
+                            class="h-px w-[50px] bg-gradient-to-r from-transparent via-dorado/50 to-transparent"></span>
                     </div>
-                    <h1 class="font-script text-[clamp(36px,10vw,56px)] max-[480px]:text-[clamp(28px,9vw,42px)] leading-[1.1] bg-gradient-to-br from-verde via-verde-medio to-verde bg-clip-text text-transparent animate-brillo-lento">
-                        Para ti, mi niña bonita</h1>
-                    <p class="font-display italic font-semibold text-[clamp(11px,2.6vw,14px)] tracking-[2.5px] uppercase mt-2 flex items-center justify-center gap-2">
+                    <h1
+                        class="font-script text-[clamp(36px,10vw,56px)] max-[480px]:text-[clamp(28px,9vw,42px)] leading-[1.1] bg-gradient-to-br from-verde via-verde-medio to-verde bg-clip-text text-transparent animate-brillo-lento">
+                        Para ti, mi nina bonita</h1>
+                    <p
+                        class="font-display italic font-semibold text-[clamp(11px,2.6vw,14px)] tracking-[2.5px] uppercase mt-2 flex items-center justify-center gap-2">
                         <span class="text-dorado">&#10022;</span>
                         <span class="text-verde/80">Para mi persona favorita</span>
                         <span class="text-dorado">&#10022;</span>
@@ -493,35 +349,49 @@
                 </div>
 
                 <!-- ===== CONTADOR DE TIEMPO ===== -->
-                <div class="flex items-center justify-center gap-6 mb-[clamp(24px,5vw,34px)]" data-aos="fade-up" data-aos-delay="100" id="contador">
-                    <div class="contador-item"><span class="contador-num" id="c-dias">--</span><span class="contador-label">Días</span></div>
-                    <div class="contador-item"><span class="contador-num" id="c-horas">--</span><span class="contador-label">Horas</span></div>
-                    <div class="contador-item"><span class="contador-num" id="c-min">--</span><span class="contador-label">Min</span></div>
-                    <div class="contador-item"><span class="contador-num" id="c-seg">--</span><span class="contador-label">Seg</span></div>
+                <div class="flex items-center justify-center gap-6 mb-[clamp(24px,5vw,34px)]" data-aos="fade-up"
+                    data-aos-delay="100" id="contador">
+                    <div class="contador-item"><span class="contador-num" id="c-dias">--</span><span
+                            class="contador-label">Dias</span></div>
+                    <div class="contador-item"><span class="contador-num" id="c-horas">--</span><span
+                            class="contador-label">Horas</span></div>
+                    <div class="contador-item"><span class="contador-num" id="c-min">--</span><span
+                            class="contador-label">Min</span></div>
+                    <div class="contador-item"><span class="contador-num" id="c-seg">--</span><span
+                            class="contador-label">Seg</span></div>
                 </div>
 
                 <!-- ===== CAROUSEL DE FOTOS ===== -->
-                <div class="relative w-full max-w-[320px] mx-auto mb-[clamp(24px,5vw,34px)]" data-aos="fade-up" data-aos-delay="200">
+                <div class="relative w-full max-w-[320px] mx-auto mb-[clamp(24px,5vw,34px)]" data-aos="fade-up"
+                    data-aos-delay="200">
                     <div class="overflow-hidden rounded-[12px] shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
                         <div class="carousel-track" id="carouselTrack">
                             <div class="carousel-slide">
                                 <div class="foto-marco p-[8px] bg-[#fffdf8]">
-                                    <img class="w-full h-auto block sepia-[8%] contrast-[1.02]" src="oto/mor.jpeg" alt="Foto juntos">
-                                    <p class="text-center italic text-[clamp(11px,2.4vw,12px)] text-tierra/80 font-medium mt-2 mb-0">Los dos juntos, siempre</p>
+                                    <img class="w-full h-auto block sepia-[8%] contrast-[1.02]" src="oto/mor.jpeg"
+                                        alt="Foto juntos">
+                                    <p
+                                        class="text-center italic text-[clamp(11px,2.4vw,12px)] text-tierra/80 font-medium mt-2 mb-0">
+                                        Los dos juntos, siempre</p>
                                 </div>
                             </div>
                             <div class="carousel-slide">
                                 <div class="foto-marco p-[8px] bg-[#fffdf8]">
-                                    <img class="w-full h-auto block sepia-[8%] contrast-[1.02]" src="oto/more.jpeg" alt="Momento especial">
-                                    <p class="text-center italic text-[clamp(11px,2.4vw,12px)] text-tierra/80 font-medium mt-2 mb-0">Un momento que atesoro</p>
+                                    <img class="w-full h-auto block sepia-[8%] contrast-[1.02]" src="oto/more.jpeg"
+                                        alt="Momento especial">
+                                    <p
+                                        class="text-center italic text-[clamp(11px,2.4vw,12px)] text-tierra/80 font-medium mt-2 mb-0">
+                                        Un momento que atesoro</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- flechas -->
-                    <button class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[rgba(0,0,0,0.3)] backdrop-blur-[8px] text-crema flex items-center justify-center text-sm transition-all hover:bg-[rgba(0,0,0,0.5)] hover:scale-110 cursor-none" id="carouselPrev" aria-label="Anterior">&#10094;</button>
-                    <button class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[rgba(0,0,0,0.3)] backdrop-blur-[8px] text-crema flex items-center justify-center text-sm transition-all hover:bg-[rgba(0,0,0,0.5)] hover:scale-110 cursor-none" id="carouselNext" aria-label="Siguiente">&#10095;</button>
-                    <!-- dots -->
+                    <button
+                        class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[rgba(0,0,0,0.3)] backdrop-blur-[8px] text-crema flex items-center justify-center text-sm transition-all hover:bg-[rgba(0,0,0,0.5)] hover:scale-110 cursor-none"
+                        id="carouselPrev" aria-label="Anterior">&#10094;</button>
+                    <button
+                        class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-[rgba(0,0,0,0.3)] backdrop-blur-[8px] text-crema flex items-center justify-center text-sm transition-all hover:bg-[rgba(0,0,0,0.5)] hover:scale-110 cursor-none"
+                        id="carouselNext" aria-label="Siguiente">&#10095;</button>
                     <div class="flex items-center justify-center gap-2 mt-3">
                         <div class="carousel-dot active" data-slide="0"></div>
                         <div class="carousel-dot" data-slide="1"></div>
@@ -529,12 +399,19 @@
                 </div>
 
                 <!-- ===== REPRODUCTOR ===== -->
-                <div class="reproductor relative max-w-[340px] max-[480px]:max-w-[290px] mx-auto mb-[clamp(20px,4vw,30px)] opacity-0 translate-y-3.5 transition-all duration-[800ms] delay-[450ms] ease-out">
-                    <div class="reproductor-fondo flex items-center gap-3.5 px-5 py-3.5 bg-gradient-to-br from-[rgba(47,93,58,0.9)] to-[rgba(22,48,36,0.95)] rounded-full cursor-none shadow-[0_8px_28px_rgba(0,0,0,0.4)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_12px_36px_rgba(0,0,0,0.5)] active:scale-[0.97]">
-                        <div class="reproductor-icono w-[42px] h-[42px] rounded-full bg-dorado text-verde-oscuro flex items-center justify-center text-base flex-shrink-0 shadow-[0_2px_10px_rgba(0,0,0,0.3)] transition-all duration-300" id="btnPlay">&#9654;</div>
+                <div
+                    class="reproductor relative max-w-[340px] max-[480px]:max-w-[290px] mx-auto mb-[clamp(20px,4vw,30px)] opacity-0 translate-y-3.5 transition-all duration-[800ms] delay-[450ms] ease-out">
+                    <div
+                        class="reproductor-fondo flex items-center gap-3.5 px-5 py-3.5 bg-gradient-to-br from-[rgba(47,93,58,0.9)] to-[rgba(22,48,36,0.95)] rounded-full cursor-none shadow-[0_8px_28px_rgba(0,0,0,0.4)] transition-all duration-300 hover:scale-[1.03] hover:shadow-[0_12px_36px_rgba(0,0,0,0.5)] active:scale-[0.97]">
+                        <div class="reproductor-icono w-[42px] h-[42px] rounded-full bg-dorado text-verde-oscuro flex items-center justify-center text-base flex-shrink-0 shadow-[0_2px_10px_rgba(0,0,0,0.3)] transition-all duration-300"
+                            id="btnPlay">&#9654;</div>
                         <div class="reproductor-info flex flex-col min-w-0">
-                            <span class="reproductor-titulo font-semibold truncate text-[clamp(13px,3vw,15px)] text-crema">presiona play y espera un momento..</span>
-                            <span class="reproductor-sub italic text-[clamp(11px,2.5vw,12.5px)] text-dorado-claro/80">Toca para escuchar &#10084;</span>
+                            <span
+                                class="reproductor-titulo font-semibold truncate text-[clamp(13px,3vw,15px)] text-crema">presiona
+                                play y espera un momento..</span>
+                            <span
+                                class="reproductor-sub italic text-[clamp(11px,2.5vw,12.5px)] text-dorado-claro/80">Toca
+                                para escuchar &#10084;</span>
                         </div>
                         <div class="reproductor-ondas flex items-center gap-[3px] ml-auto h-6 opacity-50">
                             <span class="w-[3px] h-2 bg-dorado rounded-[2px]"></span>
@@ -548,44 +425,47 @@
                 </div>
 
                 <!-- ===== TEXTO DE LA CARTA ===== -->
-                <div class="cuerpo text-[clamp(16px,3.6vw,18.5px)] max-[480px]:text-[clamp(15px,3.5vw,17px)] leading-[1.9] max-[480px]:leading-[1.8] text-tinta font-medium text-justify">
-                    <p class="mb-5 parrafo-reveal first-letter:font-script first-letter:text-[clamp(46px,11vw,62px)] first-letter:text-verde first-letter:float-left first-letter:leading-[.75] first-letter:mr-2 first-letter:mt-2 max-[360px]:first-letter:float-none max-[360px]:first-letter:inline max-[360px]:first-letter:mr-[3px]"
-                        >Quise escribirte algo que puedas leer cada vez que
-                        necesites un recordatorio de lo increíble que eres y de todo lo que significas para mí.
+                <div
+                    class="cuerpo text-[clamp(16px,3.6vw,18.5px)] max-[480px]:text-[clamp(15px,3.5vw,17px)] leading-[1.9] max-[480px]:leading-[1.8] text-tinta font-medium text-justify">
+                    <p
+                        class="mb-5 parrafo-reveal first-letter:font-script first-letter:text-[clamp(46px,11vw,62px)] first-letter:text-verde first-letter:float-left first-letter:leading-[.75] first-letter:mr-2 first-letter:mt-2 max-[360px]:first-letter:float-none max-[360px]:first-letter:inline max-[360px]:first-letter:mr-[3px]">
+                        Quise escribirte algo que puedas leer cada vez que
+                        necesites un recordatorio de lo increible que eres y de todo lo que significas para mi.
                     </p>
 
-                    <p class="mb-5 parrafo-reveal">Sé que los días no siempre son fáciles.
+                    <p class="mb-5 parrafo-reveal">Se que los dias no siempre son faciles.
                         Las materias se acumulan, los trabajos pesan, los parciales estresan y a veces el cansancio
-                        habla más fuerte que las ganas. Pero quiero que sepas que en esos momentos difíciles, yo estoy
-                        ahí, aunque no siempre pueda estarlo en persona. Cada mensaje tuyo, cada foto de tus apuntes,
-                        cada llamada en la que me cuentas cómo te fue, son mis pequeños recordatorios de que estás
-                        construyendo algo increíble, paso a paso.</p>
+                        habla mas fuerte que las ganas. Pero quiero que sepas que en esos momentos dificiles, yo estoy
+                        ahi, aunque no siempre pueda estarlo en persona. Cada mensaje tuyo, cada foto de tus apuntes,
+                        cada llamada en la que me cuentas como te fue, son mis pequenos recordatorios de que estas
+                        construyendo algo increible, paso a paso.</p>
 
                     <p class="mb-5 parrafo-reveal">
-                        Admiro tu dedicación, Lisbeth mi niña bonita. Estudiar ingeniería ambiental no es cualquier cosa: es elegir
-                        cada día contribuir a un mundo mejor, cuidar lo que otros descuidan, pensar en el futuro cuando
-                        todos viven en el presente. Y tú lo haces con una entrega que me deja sin palabras. Eres
-                        valiente, inteligente y más fuerte de lo que crees, y quiero que nunca lo olvides.</p>
+                        Admiro tu dedicacion, Lisbeth mi nina bonita. Estudiar ingenieria ambiental no es cualquier
+                        cosa: es elegir
+                        cada dia contribuir a un mundo mejor, cuidar lo que otros descuidan, pensar en el futuro cuando
+                        todos viven en el presente. Y tu lo haces con una entrega que me deja sin palabras. Eres
+                        valiente, inteligente y mas fuerte de lo que crees, y quiero que nunca lo olvides.</p>
 
-                    <p class="mb-5 parrafo-reveal">Y aunque yo esté del otro lado con mi
-                        ingeniería de sistemas, mis ecuaciones y mis líneas de código, siempre encuentro un espacio en
-                        mi día para pensar en ti. Porque tú eres mi programa más importante, mi variable constante, mi
-                        ecuación favorita que nunca termino de resolver pero que siempre me da la respuesta correcta:
-                        tú.</p>
+                    <p class="mb-5 parrafo-reveal">Y aunque yo este del otro lado con mi
+                        ingenieria de sistemas, mis ecuaciones y mis lineas de codigo, siempre encuentro un espacio en
+                        mi dia para pensar en ti. Porque tu eres mi programa mas importante, mi variable constante, mi
+                        ecuacion favorita que nunca termino de resolver pero que siempre me da la respuesta correcta:
+                        tu.</p>
 
-                    <p class="mb-5 parrafo-reveal">Quiero que sepas que confío en ti, en
+                    <p class="mb-5 parrafo-reveal">Quiero que sepas que confio en ti, en
                         todo lo que eres y en todo lo que vas a lograr. Cuando dudes de ti misma, recuerda que hay
-                        alguien que te ve con admiración, que se siente orgulloso de cada avance tuyo, por pequeño que
-                        parezca. No estás sola en esto; yo voy a estar en las buenas y en las malas, celebrando cada
-                        logro y sosteniéndote cuando haga falta.</p>
+                        alguien que te ve con admiracion, que se siente orgulloso de cada avance tuyo, por pequeno que
+                        parezca. No estas sola en esto; yo voy a estar en las buenas y en las malas, celebrando cada
+                        logro y sosteniendote cuando haga falta.</p>
 
                     <p class="mb-5 parrafo-reveal">Sigue adelante con esa fuerza que te
-                        caracteriza. Sigue cuidando del planeta como solo tú sabes hacerlo. Sigue siendo esa mujer
-                        increíble que me roba una sonrisa cada día. Y cuando el mundo se sienta pesado, vuelve a
+                        caracteriza. Sigue cuidando del planeta como solo tu sabes hacerlo. Sigue siendo esa mujer
+                        increible que me roba una sonrisa cada dia. Y cuando el mundo se sienta pesado, vuelve a
                         leer esto y recuerda: alguien te quiere con todo lo que tiene.</p>
 
                     <p class="mb-5 parrafo-reveal">
-                        Te quiero hoy, mañana y todos los días que me quedan. Tuyo, siempre.</p>
+                        Te quiero hoy, manana y todos los dias que me quedan. Tuyo, siempre.</p>
                 </div>
 
                 <div class="flex items-center justify-center gap-3 my-1.5 mb-[26px]">
@@ -594,15 +474,18 @@
                     <span class="w-[60px] h-px bg-gradient-to-l from-transparent to-dorado/50"></span>
                 </div>
 
-                <div class="text-right font-script text-[clamp(28px,7vw,38px)] max-[480px]:text-[clamp(24px,7vw,32px)] text-verde">
-                    Tuyo, con todo mi corazón</div>
+                <div
+                    class="text-right font-script text-[clamp(28px,7vw,38px)] max-[480px]:text-[clamp(24px,7vw,32px)] text-verde">
+                    Tuyo, con todo mi corazon</div>
 
-                <button class="btn-repetir relative overflow-hidden block mx-auto mt-[30px] px-[24px] py-2.5 bg-transparent border border-dorado/50 text-verde italic text-[clamp(13px,3vw,15px)] tracking-[1px] rounded-full cursor-none transition-all duration-300 ease-out hover:bg-verde hover:text-crema hover:border-verde hover:shadow-[0_0_24px_rgba(47,93,58,0.4),0_0_48px_rgba(184,147,90,0.15)] hover:-translate-y-0.5"
+                <button
+                    class="btn-repetir relative overflow-hidden block mx-auto mt-[30px] px-[24px] py-2.5 bg-transparent border border-dorado/50 text-verde italic text-[clamp(13px,3vw,15px)] tracking-[1px] rounded-full cursor-none transition-all duration-300 ease-out hover:bg-verde hover:text-crema hover:border-verde hover:shadow-[0_0_24px_rgba(47,93,58,0.4),0_0_48px_rgba(184,147,90,0.15)] hover:-translate-y-0.5"
                     id="btnRepetir">&#10084; Volver a leer &#10084;</button>
 
             </div>
 
-            <div class="sello absolute bottom-[clamp(18px,4vw,28px)] right-[clamp(18px,4vw,28px)] w-[clamp(50px,12vw,68px)] h-[clamp(50px,12vw,68px)] rounded-full bg-[radial-gradient(circle_at_35%_35%,#5fae6b,#2f5d3a_60%,#163024)] shadow-[0_4px_16px_rgba(0,0,0,0.5),inset_0_2px_4px_rgba(255,255,255,0.15),inset_0_-2px_6px_rgba(0,0,0,0.3),0_0_0_1px_rgba(227,200,150,0.35)] flex items-center justify-center text-dorado-claro text-[clamp(20px,5vw,28px)] opacity-0 scale-[.6] -rotate-[15deg] transition-all duration-[600ms] ease-[cubic-bezier(.4,1.6,.5,1)] z-[3] hover:scale-110 hover:rotate-[5deg] hover:opacity-100">
+            <div
+                class="sello absolute bottom-[clamp(18px,4vw,28px)] right-[clamp(18px,4vw,28px)] w-[clamp(50px,12vw,68px)] h-[clamp(50px,12vw,68px)] rounded-full bg-[radial-gradient(circle_at_35%_35%,#5fae6b,#2f5d3a_60%,#163024)] shadow-[0_4px_16px_rgba(0,0,0,0.5),inset_0_2px_4px_rgba(255,255,255,0.15),inset_0_-2px_6px_rgba(0,0,0,0.3),0_0_0_1px_rgba(227,200,150,0.35)] flex items-center justify-center text-dorado-claro text-[clamp(20px,5vw,28px)] opacity-0 scale-[.6] -rotate-[15deg] transition-all duration-[600ms] ease-[cubic-bezier(.4,1.6,.5,1)] z-[3] hover:scale-110 hover:rotate-[5deg] hover:opacity-100">
                 &#127807;</div>
         </div>
 
@@ -610,314 +493,20 @@
 
     <div class="fixed inset-0 pointer-events-none z-20" id="capaExplosion"></div>
 
-    <script>
-        /* ============================================================
-           CONFIGURACIÓN - CAMBIA LA FECHA DE INICIO AQUÍ
-           Formato: AAAA-MM-DD
-           ============================================================ */
-        const FECHA_INICIO = '2025-01-01'; // <-- CAMBIA ESTA FECHA
-
-        const prefiereMenosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const coloresElegantes = ['#4a7c59','#9db5a5','#d7e4c9','#b8935a','#e3c896','#2f5d3a'];
-
-        /* ============ 0. LOADER ============ */
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hidden');
-            }, 1800);
-        });
-
-        /* ============ 1. CURSOR PERSONALIZADO ============ */
-        const cursorDot = document.getElementById('cursor-dot');
-        const cursorRing = document.getElementById('cursor-ring');
-        let mouseX = 0, mouseY = 0;
-        let ringX = 0, ringY = 0;
-        let particleCount = 0;
-
-        if (!prefiereMenosMovimiento && window.innerWidth > 768) {
-            document.body.classList.add('hs-cursor-ativo');
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                cursorDot.style.left = mouseX - 4 + 'px';
-                cursorDot.style.top = mouseY - 4 + 'px';
-
-                // partículas de estela
-                particleCount++;
-                if (particleCount % 3 === 0) {
-                    const p = document.createElement('div');
-                    p.className = 'cursor-particle';
-                    p.style.left = mouseX + 'px';
-                    p.style.top = mouseY + 'px';
-                    document.body.appendChild(p);
-                    setTimeout(() => p.remove(), 600);
-                }
-            });
-
-            function animarCursor() {
-                ringX += (mouseX - ringX) * 0.12;
-                ringY += (mouseY - ringY) * 0.12;
-                cursorRing.style.left = ringX - 18 + 'px';
-                cursorRing.style.top = ringY - 18 + 'px';
-                requestAnimationFrame(animarCursor);
-            }
-            animarCursor();
-
-            // efecto hover en elementos interactivos
-            document.querySelectorAll('button, a, .tarjeta-portada, .reproductor-fondo, .carousel-dot').forEach(el => {
-                el.addEventListener('mouseenter', () => cursorRing.classList.add('hovering'));
-                el.addEventListener('mouseleave', () => cursorRing.classList.remove('hovering'));
-            });
-        } else {
-            cursorDot.style.display = 'none';
-            cursorRing.style.display = 'none';
-        }
-
-        /* ============ 2. BARRA DE PROGRESO ============ */
-        const progressBar = document.getElementById('progress-bar');
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.scrollY;
-            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-            progressBar.style.width = progress + '%';
-        });
-
-        /* ============ 3. CONTADOR DE TIEMPO ============ */
-        function actualizarContador() {
-            const inicio = new Date(FECHA_INICIO);
-            const ahora = new Date();
-            const diff = ahora - inicio;
-
-            const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const horas = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutos = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const segundos = Math.floor((diff % (1000 * 60)) / 1000);
-
-            document.getElementById('c-dias').textContent = dias;
-            document.getElementById('c-horas').textContent = String(horas).padStart(2, '0');
-            document.getElementById('c-min').textContent = String(minutos).padStart(2, '0');
-            document.getElementById('c-seg').textContent = String(segundos).padStart(2, '0');
-        }
-        actualizarContador();
-        setInterval(actualizarContador, 1000);
-
-        /* ============ 4. CAROUSEL ============ */
-        const carouselTrack = document.getElementById('carouselTrack');
-        const carouselDots = document.querySelectorAll('.carousel-dot');
-        const prevBtn = document.getElementById('carouselPrev');
-        const nextBtn = document.getElementById('carouselNext');
-        let currentSlide = 0;
-        const totalSlides = 2;
-
-        function goToSlide(n) {
-            currentSlide = (n + totalSlides) % totalSlides;
-            carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-            carouselDots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
-        }
-        prevBtn.addEventListener('click', () => goToSlide(currentSlide - 1));
-        nextBtn.addEventListener('click', () => goToSlide(currentSlide + 1));
-        carouselDots.forEach(d => d.addEventListener('click', () => goToSlide(+d.dataset.slide)));
-
-        // auto-avance cada 5s
-        setInterval(() => goToSlide(currentSlide + 1), 5000);
-
-        /* ============ 5. PARALLAX / REVEAL DE PÁRRAFOS ============ */
-        function setupParallax() {
-            const parrafos = document.querySelectorAll('.parrafo-reveal');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-
-            parrafos.forEach(p => observer.observe(p));
-        }
-        setupParallax();
-
-        /* ============ 6. PARTÍCULAS DE FONDO ============ */
-        const capaParticulas = document.getElementById('capa-particulas');
-        function crearParticulas() {
-            if (prefiereMenosMovimiento) return;
-            for (let i = 0; i < 30; i++) {
-                const p = document.createElement('div');
-                p.className = 'particle';
-                p.style.left = Math.random() * 100 + '%';
-                p.style.top = Math.random() * 100 + '%';
-                const tam = 2 + Math.random() * 3;
-                p.style.width = tam + 'px';
-                p.style.height = tam + 'px';
-                p.style.background = Math.random() > 0.6
-                    ? 'radial-gradient(circle,rgba(184,147,90,0.5),transparent)'
-                    : 'radial-gradient(circle,rgba(74,124,89,0.35),transparent)';
-                p.style.animationDelay = Math.random() * 5 + 's';
-                p.style.animationDuration = (3 + Math.random() * 4) + 's';
-                capaParticulas.appendChild(p);
-            }
-        }
-        crearParticulas();
-
-        /* ============ 7. HOJAS FLOTANTES ============ */
-        const capaCorazones = document.getElementById('capa-corazones');
-        function crearFlotante() {
-            if (prefiereMenosMovimiento) return;
-            const c = document.createElement('span');
-            const ale = Math.random();
-            c.innerHTML = ale < 0.4 ? '&#127807;' : ale < 0.7 ? '&#127806;' : (ale < 0.88 ? '&#10084;' : '&#10022;');
-            const dorado = ale >= 0.88;
-            c.className = 'fixed -bottom-[6vh] opacity-0 pointer-events-none z-0 animate-flotar drop-shadow-[0_0_3px_rgba(0,0,0,0.12)]' +
-                (dorado ? ' text-dorado-claro drop-shadow-[0_0_8px_rgba(184,147,90,0.5)]' : ' text-salvia-claro/70');
-            const tam = 12 + Math.random() * 14;
-            c.style.left = Math.random() * 100 + '%';
-            c.style.fontSize = tam + 'px';
-            c.style.animationDuration = (9 + Math.random() * 7) + 's';
-            capaCorazones.appendChild(c);
-            setTimeout(() => c.remove(), 16000);
-        }
-        setInterval(crearFlotante, 1600);
-        for (let i = 0; i < 4; i++) setTimeout(crearFlotante, i * 600);
-
-        /* ============ 8. EXPLOSIÓN AL ABRIR ============ */
-        const capaExplosion = document.getElementById('capaExplosion');
-        function explotarCorazones(x, y) {
-            if (prefiereMenosMovimiento) return;
-            for (let i = 0; i < 24; i++) {
-                const h = document.createElement('span');
-                h.className = 'absolute will-change-transform animate-burst';
-                const esHoja = Math.random() > 0.6;
-                h.innerHTML = esHoja ? '&#127807;' : '&#10084;';
-                h.style.color = esHoja ? '#6aa06f' : '#e3c896';
-                const angulo = (Math.PI * 2 * i) / 24 + Math.random() * 0.4;
-                const distancia = 70 + Math.random() * 120;
-                h.style.left = x + 'px';
-                h.style.top = y + 'px';
-                h.style.setProperty('--dx', Math.cos(angulo) * distancia + 'px');
-                h.style.setProperty('--dy', Math.sin(angulo) * distancia - 40 + 'px');
-                h.style.setProperty('--rot', (Math.random() * 90 - 45) + 'deg');
-                h.style.fontSize = (12 + Math.random() * 14) + 'px';
-                h.style.animationDelay = (Math.random() * 0.2) + 's';
-                capaExplosion.appendChild(h);
-                setTimeout(() => h.remove(), 1500);
-            }
-        }
-
-        /* ============ 9. ABRIR CARTA ============ */
-        const tarjetaPortada = document.getElementById('tarjetaPortada');
-        const portada = document.getElementById('portada');
-        const carta = document.getElementById('carta');
-        const btnRepetir = document.getElementById('btnRepetir');
-
-        function abrirCarta() {
-            const rect = tarjetaPortada.getBoundingClientRect();
-            explotarCorazones(rect.left + rect.width / 2, rect.top + rect.height / 2);
-            portada.classList.add('abriendo');
-            setTimeout(() => {
-                portada.classList.add('oculto');
-                carta.classList.add('visible');
-                carta.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 550);
-        }
-
-        tarjetaPortada.addEventListener('click', abrirCarta);
-        tarjetaPortada.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrirCarta(); }
-        });
-
-        btnRepetir.addEventListener('click', () => {
-            carta.classList.remove('visible');
-            portada.classList.remove('abriendo', 'oculto');
-            detenerAudio();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        /* ============ 10. AUDIO YOUTUBE ============ */
-        const reproductor = document.querySelector('.reproductor');
-        const btnPlay = document.getElementById('btnPlay');
-        const subTexto = reproductor.querySelector('.reproductor-sub');
-        let audioActivo = false;
-        let ytPlayer = null;
-        let intentosAudio = 0;
-
-        const tag = document.createElement('script');
-        tag.src = 'https://www.youtube.com/iframe_api';
-        document.head.appendChild(tag);
-
-        function onYouTubeIframeAPIReady() {
-            ytPlayer = new YT.Player('ytAudio', {
-                videoId: 'DKqBk3es6mA',
-                playerVars: { autoplay: 0, controls: 0, showinfo: 0, rel: 0, modestbranding: 1, playsinline: 1 },
-                events: { onReady: function(e) { e.target.setVolume(100); } }
-            });
-        }
-
-        function iniciarAudio() {
-            if (ytPlayer && ytPlayer.playVideo) {
-                intentosAudio = 0;
-                if (ytPlayer.unMute) ytPlayer.unMute();
-                ytPlayer.playVideo();
-                audioActivo = true;
-                subTexto.innerHTML = 'Nuestra canción &#127925;';
-                reproductor.classList.add('playing');
-                btnPlay.innerHTML = '&#10074;&#10074;';
-            } else if (intentosAudio < 50) {
-                intentosAudio++;
-                setTimeout(iniciarAudio, 200);
-            } else {
-                subTexto.innerHTML = 'Toca para escuchar &#10084;';
-            }
-        }
-
-        function detenerAudio() {
-            if (ytPlayer && ytPlayer.pauseVideo) ytPlayer.pauseVideo();
-            audioActivo = false;
-            reproductor.classList.remove('playing');
-            btnPlay.innerHTML = '&#9654;';
-            subTexto.innerHTML = 'Toca para escuchar &#10084;';
-        }
-
-        reproductor.addEventListener('click', () => {
-            reproductor.classList.contains('playing') ? detenerAudio() : iniciarAudio();
-        });
-
-        /* ============ 11. AOS + TYPED + LENIS ============ */
-        if (window.AOS) AOS.init({ once: true, duration: 900, offset: 70, easing: 'ease-out-cubic' });
-
-        const textoTipo = document.getElementById('textoTipo');
-        if (textoTipo) {
-            if (!prefiereMenosMovimiento && window.Typed) {
-                new Typed(textoTipo, {
-                    strings: [
-                        'Mi ingeniera ambiental &#127807;',
-                        'Cuidando del planeta y de mí &#128154;',
-                        'Mi fuerza, mi calma &#10024;',
-                        'Siempre juntos &#128149;',
-                        'Tú y yo, el equipo perfecto &#128640;'
-                    ],
-                    typeSpeed: 50, backSpeed: 25, backDelay: 1800, startDelay: 800,
-                    loop: true, showCursor: false
-                });
-            } else {
-                textoTipo.textContent = 'Mi ingeniera ambiental';
-            }
-        }
-
-        if (!prefiereMenosMovimiento && window.Lenis) new Lenis({ autoRaf: true });
-
-        /* ============ 12. EFECTO MAGNÉTICO EN TARJETA ============ */
-        if (!prefiereMenosMovimiento && window.innerWidth > 768) {
-            tarjetaPortada.addEventListener('mousemove', (e) => {
-                const rect = tarjetaPortada.getBoundingClientRect();
-                const x = (e.clientX - rect.left) / rect.width - 0.5;
-                const y = (e.clientY - rect.top) / rect.height - 0.5;
-                tarjetaPortada.style.transform = `perspective(800px) rotateY(${x * 6}deg) rotateX(${-y * 6}deg) scale(1.015)`;
-            });
-            tarjetaPortada.addEventListener('mouseleave', () => {
-                tarjetaPortada.style.transform = '';
-            });
-        }
-    </script>
-
+    <!-- JavaScript modules (orden importa) -->
+    <script src="js/config.js"></script>
+    <script src="js/loader.js"></script>
+    <script src="js/cursor.js"></script>
+    <script src="js/progress.js"></script>
+    <script src="js/counter.js"></script>
+    <script src="js/carousel.js"></script>
+    <script src="js/parallax.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/floating.js"></script>
+    <script src="js/explosion.js"></script>
+    <script src="js/letter.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/effects.js"></script>
+    <script src="js/app.js"></script>
 </body>
-
 </html>
