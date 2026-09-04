@@ -157,12 +157,22 @@ function construirHTMLCarta() {
                             <div class="gallery-item-zoom">&#128269;</div>
                         </div>
                     </div>
+                    <div class="carousel-slide">
+                        <div class="gallery-item" onclick="abrirLightbox('oto/m.jpeg','Contigo cada dia')">
+                            <img src="oto/m.jpeg" alt="Contigo cada dia" loading="lazy">
+                            <div class="gallery-item-overlay">
+                                <span class="gallery-item-caption">Contigo cada dia</span>
+                            </div>
+                            <div class="gallery-item-zoom">&#128269;</div>
+                        </div>
+                    </div>
                 </div>
                 <button class="carousel-btn carousel-btn-prev" onclick="carruselAnterior()">&#10094;</button>
                 <button class="carousel-btn carousel-btn-next" onclick="carruselSiguiente()">&#10095;</button>
                 <div class="carousel-dots" id="puntosCarrusel">
                     <div class="carousel-dot active" data-slide="0" onclick="carruselIrA(0)"></div>
                     <div class="carousel-dot" data-slide="1" onclick="carruselIrA(1)"></div>
+                    <div class="carousel-dot" data-slide="2" onclick="carruselIrA(2)"></div>
                 </div>
             </div>
         </div>
@@ -215,7 +225,7 @@ function construirHTMLCarta() {
 
 /* ---- CARRUSEL ---- */
 let diapositivaActual = 0;
-const totalDiapositivas = 2;
+const totalDiapositivas = 3;
 let temporizadorCarrusel = null;
 
 function configurarCarrusel() {
@@ -246,6 +256,117 @@ function actualizarCarrusel() {
     if (!pista) return;
     pista.style.transform = `translateX(-${diapositivaActual * 100}%)`;
     puntos.forEach((punto, i) => punto.classList.toggle('active', i === diapositivaActual));
+}
+
+/* ---- MENSAJE DEL DIA EN PYTHON ---- */
+const MENSAJE_PY = [
+    '# archivo: mensaje_del_dia.py',
+    '',
+    'def encontrar_constante(universo):',
+    '    for elemento in universo:',
+    '        if elemento.nombre == "Lisbeth":',
+    '            return elemento',
+    '    raise ValueError("sin_quererte_minimo")',
+    '',
+    'constante = encontrar_constante(universo)',
+    'print("En este mundo de variables,")',
+    'print(f"{constante} eres mi única constante.")',
+    '# >>> True',
+];
+
+const BLOQUE_CURSOR = '<span class="cursor-bloque">&#9608;</span>';
+
+function colorearPython(texto) {
+    let t = texto
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+    if (t.trim().startsWith('#')) {
+        return '<span class="py-comentario">' + t + '</span>';
+    }
+
+    t = t.replace(/`[^`]*`|"[^"]*"/g, '<span class="py-cadena">$&</span>');
+
+    const claves = /\b(def|for|in|if|return|raise|print|self|class|import|from|True|False|None|f)\b/g;
+    t = t.replace(claves, '<span class="py-clave">$1</span>');
+
+    return t;
+}
+
+function escribirCodigo(contenedor, lineas) {
+    let indiceLinea = 0;
+    let indiceCaracter = 0;
+
+    function dibujar() {
+        if (indiceLinea >= lineas.length) {
+            contenedor.innerHTML += '<div class="linea-codigo prompt">&gt;&gt;&gt; ' + BLOQUE_CURSOR + '</div>';
+            return;
+        }
+
+        let html = '';
+        for (let i = 0; i < indiceLinea; i++) {
+            const linea = lineas[i];
+            html += '<div class="linea-codigo">' + (linea === '' ? '&nbsp;' : colorearPython(linea)) + '</div>';
+        }
+
+        const actual = lineas[indiceLinea];
+        let avance = 22;
+
+        if (actual === '') {
+            html += '<div class="linea-codigo">&nbsp;</div>';
+            indiceLinea++;
+            avance = 140;
+        } else {
+            const tipeado = colorearPython(actual.slice(0, indiceCaracter));
+            html += '<div class="linea-codigo">' + tipeado + BLOQUE_CURSOR + '</div>';
+            indiceCaracter++;
+            if (indiceCaracter > actual.length) {
+                indiceCaracter = 0;
+                indiceLinea++;
+                avance = 240;
+            }
+        }
+
+        contenedor.innerHTML = html;
+        const ventana = contenedor.closest('.ventana-codigo-cuerpo');
+        if (ventana) ventana.scrollTop = ventana.scrollHeight;
+
+        setTimeout(dibujar, avance);
+    }
+
+    dibujar();
+}
+
+function verMensajeDelDia() {
+    if (typeof Swal === 'undefined') return;
+
+    baseSwal({
+        title: '&#128276; Nuevo mensaje del dia',
+        html: `
+            <div class="ventana-codigo">
+                <div class="ventana-codigo-barra">
+                    <span class="ventana-punto vp-rojo"></span>
+                    <span class="ventana-punto vp-ambar"></span>
+                    <span class="ventana-punto vp-verde"></span>
+                    <span class="ventana-titulo">mensaje_del_dia.py &mdash; Python 3.12</span>
+                </div>
+                <div class="ventana-codigo-cuerpo" id="cuerpoCodigo"></div>
+            </div>
+            <p class="mensaje-frase">&#10022; En este mundo de variables, eres mi &uacute;nica constante &#10022;</p>
+        `,
+        customClass: { popup: 'swal-futuristic swal-codigo' },
+        showClass: { popup: 'animate__animated animate__zoomIn' },
+        hideClass: { popup: 'animate__animated animate__zoomOut' },
+        showConfirmButton: false,
+        showCloseButton: true,
+        closeButtonHtml: '<span style="font-size:20px;color:rgba(215,228,201,0.6);line-height:1;">&times;</span>',
+        allowOutsideClick: true,
+        didOpen: () => {
+            const cuerpo = document.getElementById('cuerpoCodigo');
+            if (cuerpo) escribirCodigo(cuerpo, MENSAJE_PY);
+        },
+    });
 }
 
 /* ---- INTERCEPTAR BOTON CERRAR ---- */

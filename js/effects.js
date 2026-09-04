@@ -1,6 +1,6 @@
 const ESTADOS_SISTEMA = [
     '&gt; modulo afecto: 100% activo',
-    '&gt; recuerdos optimizados con IA',
+    '&gt; recuerdos optimizados con Sunqu',
     '&gt; sostenibilidad emocional: ALTA',
     '&gt; vinculo seguro · cifrado con amor',
     '&gt; listo para tocar'
