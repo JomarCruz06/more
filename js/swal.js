@@ -38,9 +38,9 @@ function mostrarBienvenida() {
     baseSwal({
         title: 'Hola mi vida',
         html: `
-            <p>Has abierto esta carta porque significas mucho para mi.</p>
-            <p>Disfruta cada palabra, cada foto y nuestra cancion.</p>
-            <p class="bienvenida-firma">&#127807; Con amor &#127807;</p>
+            <p>Has abierto este pequeño detalle, porque significas mucho para mi.</p>
+            <p>Disfruta cada palabra, cada foto y cada pensamientoque.</p>
+            <p class="bienvenida-firma">&#127807; Con kariño &#127807;</p>
         `,
         icon: 'success',
         iconColor: '#4a7c59',
@@ -294,12 +294,16 @@ function colorearPython(texto) {
     return t;
 }
 
-function escribirCodigo(contenedor, lineas) {
+function escribirCodigo(contenedor, lineas, finalizar) {
     let indiceLinea = 0;
     let indiceCaracter = 0;
 
     function dibujar() {
         if (indiceLinea >= lineas.length) {
+            if (finalizar) {
+                finalizar();
+                return;
+            }
             contenedor.innerHTML += '<div class="linea-codigo prompt">&gt;&gt;&gt; ' + BLOQUE_CURSOR + '</div>';
             return;
         }
@@ -338,6 +342,37 @@ function escribirCodigo(contenedor, lineas) {
     dibujar();
 }
 
+function mostrarSalidaTerminal(contenedor) {
+    contenedor.innerHTML += '<div class="linea-codigo comando">$ python mensaje_del_dia.py</div>';
+
+    const salida = document.createElement('div');
+    salida.className = 'ventana-salida';
+    contenedor.appendChild(salida);
+
+    const lineas = [
+        'Corriendo amor.exe &#128154; metadata...  [OK]',
+        'En este mundo de variables,',
+        '<span class="salida-nombre">Lisbeth</span> eres mi <span class="salida-constante">&uacute;nica constante</span>.'
+    ];
+
+    let i = 0;
+    function revelar() {
+        if (i >= lineas.length) {
+            salida.innerHTML += '<div class="linea-salida final"><span class="cursor-bloque">&#9608;</span></div>';
+            return;
+        }
+        const linea = document.createElement('div');
+        linea.className = 'linea-salida';
+        linea.innerHTML = lineas[i];
+        salida.appendChild(linea);
+        i++;
+        const ventana = contenedor.closest('.ventana-codigo-cuerpo');
+        if (ventana) ventana.scrollTop = ventana.scrollHeight;
+        setTimeout(revelar, 520);
+    }
+    setTimeout(revelar, 600);
+}
+
 function verMensajeDelDia() {
     if (typeof Swal === 'undefined') return;
 
@@ -364,7 +399,7 @@ function verMensajeDelDia() {
         allowOutsideClick: true,
         didOpen: () => {
             const cuerpo = document.getElementById('cuerpoCodigo');
-            if (cuerpo) escribirCodigo(cuerpo, MENSAJE_PY);
+            if (cuerpo) escribirCodigo(cuerpo, MENSAJE_PY, () => mostrarSalidaTerminal(cuerpo));
         },
     });
 }
