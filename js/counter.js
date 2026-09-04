@@ -1,4 +1,8 @@
+let counterInterval = null;
+
 function initCounter() {
+    if (counterInterval) clearInterval(counterInterval);
+
     function calcular() {
         const inicio = new Date(App.config.FECHA_INICIO);
         const ahora = new Date();
@@ -25,5 +29,10 @@ function initCounter() {
     }
 
     renderizar();
-    setInterval(renderizar, 1000);
+    counterInterval = setInterval(renderizar, 1000);
+}
+
+function detenerCounter() {
+    if (counterInterval) clearInterval(counterInterval);
+    counterInterval = null;
 }

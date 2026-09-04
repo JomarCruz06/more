@@ -1,5 +1,5 @@
 /* ============================================================
-   SWEETALERT2 - Utilidades maximizadas
+   SWEETALERT2 - Sistema completo de modales
    ============================================================ */
 
 function swalBase(opts) {
@@ -28,56 +28,70 @@ function mostrarToast(titulo, icono) {
     });
 }
 
+/* ---- BIENVENIDA ---- */
 function mostrarBienvenida() {
-    if (typeof Swal === 'undefined') return;
+    if (typeof Swal === 'undefined') {
+        abrirCartaModal();
+        return;
+    }
 
     swalBase({
         title: 'Hola mi vida',
         html: `
             <p>Has abierto esta carta porque significas mucho para mi.</p>
             <p>Disfruta cada palabra, cada foto y nuestra cancion.</p>
-            <p style="margin-top:16px; font-style:italic; opacity:0.5; font-size:0.85em;">
+            <p style="margin-top:16px;font-style:italic;opacity:0.5;font-size:0.85em;">
                 &#127807; Con amor &#127807;
             </p>
         `,
         icon: 'success',
         iconColor: '#4a7c59',
         confirmText: 'Abrir carta',
-        timer: 10000,
-        timerProgressBar: true,
-    }).then((result) => {
+        allowOutsideClick: false,
+        allowEscapeKey: false,
+        showConfirmButton: true,
+    }).then(() => {
         abrirCartaModal();
     });
 }
 
+/* ---- CARTA MODAL (fullscreen) ---- */
 function abrirCartaModal() {
     if (typeof Swal === 'undefined') return;
 
-    const letterHTML = construirHTMLCarta();
+    /* Cerrar cualquier modal abierto primero */
+    Swal.close();
 
-    swalBase({
-        html: letterHTML,
-        customClass: { popup: 'swal-futuristic swal-fullscreen' },
-        showClass: { popup: 'animate__animated animate__zoomIn' },
-        hideClass: { popup: 'animate__animated animate__zoomOut' },
-        showConfirmButton: false,
-        showCloseButton: true,
-        closeButtonHtml: '<span style="font-size:18px; color:rgba(215,228,201,0.5);">&times;</span>',
-        didOpen: () => {
-            initCounter();
-            initModalAudio();
-            initGalleryLightbox();
-            showToastBienvenida();
-        },
-    });
-}
-
-function showToastBienvenida() {
     setTimeout(() => {
-        mostrarToast('Desliza para leer la carta', 'info');
-    }, 1500);
+        const letterHTML = construirHTMLCarta();
+
+        swalBase({
+            html: letterHTML,
+            customClass: { popup: 'swal-futuristic swal-fullscreen' },
+            showClass: { popup: 'animate__animated animate__zoomIn' },
+            hideClass: { popup: 'animate__animated animate__fadeOut' },
+            showConfirmButton: false,
+            showCloseButton: true,
+            closeButtonHtml: '<span style="font-size:20px;color:rgba(215,228,201,0.6);line-height:1;">&times;</span>',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            didOpen: () => {
+                initCounter();
+                initModalAudio();
+                setupCloseButton();
+                setupCarousel();
+            },
+            willClose: () => {
+                detenerModalAudio();
+                detenerCounter();
+                clearInterval(modalCarouselTimer);
+                modalCarouselTimer = null;
+            },
+        });
+    }, 350);
 }
 
+/* ---- CONSTRUIR HTML CARTA ---- */
 function construirHTMLCarta() {
     return `
     <div class="letter-modal">
@@ -85,7 +99,7 @@ function construirHTMLCarta() {
         <div class="letter-header">
             <div class="letter-header-icon">
                 <span></span>
-                <span style="color:#6aa06f; font-size:16px;">&#127807;</span>
+                <span style="color:#6aa06f;font-size:18px;">&#127807;</span>
                 <span></span>
             </div>
             <h1>Para ti, mi nina bonita</h1>
@@ -112,20 +126,32 @@ function construirHTMLCarta() {
         </div>
 
         <div class="letter-gallery">
-            <div class="gallery-grid">
-                <div class="gallery-item" onclick="abrirLightbox('oto/mor.jpeg', 'Los dos juntos, siempre')">
-                    <img src="oto/mor.jpeg" alt="Foto juntos" loading="lazy">
-                    <div class="gallery-item-overlay">
-                        <span class="gallery-item-caption">Los dos juntos, siempre</span>
+            <div class="carousel-wrapper">
+                <div class="carousel-track" id="modalCarouselTrack">
+                    <div class="carousel-slide">
+                        <div class="gallery-item" onclick="abrirLightbox('oto/mor.jpeg','Los dos juntos, siempre')">
+                            <img src="oto/mor.jpeg" alt="Foto juntos" loading="lazy">
+                            <div class="gallery-item-overlay">
+                                <span class="gallery-item-caption">Los dos juntos, siempre</span>
+                            </div>
+                            <div class="gallery-item-zoom">&#128269;</div>
+                        </div>
                     </div>
-                    <div class="gallery-item-zoom">&#128269;</div>
+                    <div class="carousel-slide">
+                        <div class="gallery-item" onclick="abrirLightbox('oto/more.jpeg','Un momento que atesoro')">
+                            <img src="oto/more.jpeg" alt="Momento especial" loading="lazy">
+                            <div class="gallery-item-overlay">
+                                <span class="gallery-item-caption">Un momento que atesoro</span>
+                            </div>
+                            <div class="gallery-item-zoom">&#128269;</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="gallery-item" onclick="abrirLightbox('oto/more.jpeg', 'Un momento que atesoro')">
-                    <img src="oto/more.jpeg" alt="Momento especial" loading="lazy">
-                    <div class="gallery-item-overlay">
-                        <span class="gallery-item-caption">Un momento que atesoro</span>
-                    </div>
-                    <div class="gallery-item-zoom">&#128269;</div>
+                <button class="carousel-btn carousel-btn-prev" onclick="modalCarouselPrev()">&#10094;</button>
+                <button class="carousel-btn carousel-btn-next" onclick="modalCarouselNext()">&#10095;</button>
+                <div class="carousel-dots" id="modalCarouselDots">
+                    <div class="carousel-dot active" data-slide="0" onclick="modalCarouselGo(0)"></div>
+                    <div class="carousel-dot" data-slide="1" onclick="modalCarouselGo(1)"></div>
                 </div>
             </div>
         </div>
@@ -176,32 +202,60 @@ function construirHTMLCarta() {
     `;
 }
 
-function abrirLightbox(src, caption) {
-    if (typeof Swal === 'undefined') return;
+/* ---- CAROUSEL ---- */
+let modalSlideActual = 0;
+const modalTotalSlides = 2;
+let modalCarouselTimer = null;
 
-    swalBase({
-        html: `
-            <img src="${src}" alt="${caption}" style="width:100%;display:block;border-radius:8px;">
-            <p style="text-align:center;font-style:italic;margin:12px 0 0;font-size:13px;color:rgba(215,228,201,0.6);">${caption}</p>
-        `,
-        customClass: { popup: 'swal-futuristic swal-lightbox' },
-        showClass: { popup: 'animate__animated animate__zoomIn' },
-        hideClass: { popup: 'animate__animated animate__zoomOut' },
-        showConfirmButton: false,
-        showCloseButton: true,
-        closeButtonHtml: '<span style="font-size:20px; color:rgba(255,255,255,0.7);">&times;</span>',
-        showDenyButton: false,
-        showCancelButton: false,
-        didOpen: () => {
-            document.querySelector('.swal-lightbox img').addEventListener('click', () => {
-                Swal.close();
-            });
-        },
-    });
+function setupCarousel() {
+    modalSlideActual = 0;
+    updateCarousel();
+    clearInterval(modalCarouselTimer);
+    modalCarouselTimer = setInterval(() => modalCarouselNext(), 5000);
 }
 
-function confirmarCerrar(callback) {
-    if (typeof Swal === 'undefined') { callback(); return; }
+function modalCarouselGo(n) {
+    modalSlideActual = ((n % modalTotalSlides) + modalTotalSlides) % modalTotalSlides;
+    updateCarousel();
+    clearInterval(modalCarouselTimer);
+    modalCarouselTimer = setInterval(() => modalCarouselNext(), 5000);
+}
+
+function modalCarouselNext() {
+    modalCarouselGo(modalSlideActual + 1);
+}
+
+function modalCarouselPrev() {
+    modalCarouselGo(modalSlideActual - 1);
+}
+
+function updateCarousel() {
+    const track = document.getElementById('modalCarouselTrack');
+    const dots = document.querySelectorAll('#modalCarouselDots .carousel-dot');
+    if (!track) return;
+    track.style.transform = `translateX(-${modalSlideActual * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === modalSlideActual));
+}
+
+/* ---- INTERCEPTAR BOTON CERRAR ---- */
+function setupCloseButton() {
+    const closeBtn = document.querySelector('.swal-fullscreen .swal2-close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            confirmarCerrarCarta();
+        }, true);
+    }
+}
+
+/* ---- CONFIRMAR CERRAR ---- */
+function confirmarCerrarCarta() {
+    if (typeof Swal === 'undefined') {
+        Swal.close();
+        App.el.portada.classList.remove('abriendo', 'oculto');
+        return;
+    }
 
     swalBase({
         title: 'Volver a la portada?',
@@ -212,7 +266,16 @@ function confirmarCerrar(callback) {
         confirmText: 'Si, volver',
         cancelText: 'Quedarme aqui',
         customClass: { popup: 'swal-futuristic swal-confirm' },
+        allowOutsideClick: false,
+        allowEscapeKey: false,
     }).then((result) => {
-        if (result.isConfirmed) callback();
+        if (result.isConfirmed) {
+            Swal.close();
+            App.el.portada.classList.remove('abriendo', 'oculto');
+        }
+        if (result.isDismissed) {
+            /* Volver a mostrar la carta modal si cancelo */
+            abrirCartaModal();
+        }
     });
 }

@@ -1,8 +1,3 @@
-function initGalleryLightbox() {
-    // Gallery items use onclick="abrirLightbox(...)" in HTML
-    // This function initializes any additional gallery features
-}
-
 function initEffects() {
     initTyped();
     initLenis();

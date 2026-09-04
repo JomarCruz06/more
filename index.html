@@ -42,6 +42,12 @@
             --font-script: 'Great Vibes', cursive;
             --font-serif: 'Cormorant Garamond', serif;
             --font-display: 'Playfair Display', serif;
+
+            --animate-flotar-hoja: flotar-hoja 7s ease-in-out infinite;
+            @keyframes flotar-hoja {
+                0%, 100% { translate: 0 0; }
+                50% { translate: 0 -18px; }
+            }
         }
 
         @layer base {
@@ -109,6 +115,15 @@
 
         <div class="tarjeta-portada" id="tarjetaPortada" role="button" tabindex="0" aria-label="Abrir la carta">
 
+            <div class="tarjeta-hud" aria-hidden="true">
+                <span class="hud-corner hud-c-tl"></span>
+                <span class="hud-corner hud-c-tr"></span>
+                <span class="hud-corner hud-c-bl"></span>
+                <span class="hud-corner hud-c-br"></span>
+                <span class="hud-line hud-l-top"></span>
+                <span class="hud-line hud-l-bottom"></span>
+            </div>
+
             <div class="monograma">
                 <span>J</span>
             </div>
@@ -144,6 +159,7 @@
     <script src="js/explosion.js"></script>
     <script src="js/letter.js"></script>
     <script src="js/audio.js"></script>
+    <script src="js/lightbox.js"></script>
     <script src="js/effects.js"></script>
     <script src="js/app.js"></script>
 </body>
