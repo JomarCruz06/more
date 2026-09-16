@@ -259,18 +259,26 @@ function actualizarCarrusel() {
 }
 
 /* ---- MENSAJE DEL DIA EN PYTHON ---- */
+function diasHasta21Septiembre() {
+    const hoy = new Date();
+    let objetivo = new Date(hoy.getFullYear(), 8, 21);
+    if (objetivo < hoy) objetivo = new Date(hoy.getFullYear() + 1, 8, 21);
+    return Math.ceil((objetivo - hoy) / (1000 * 60 * 60 * 24));
+}
+
 const MENSAJE_PY = [
-    '# archivo: mensaje_del_dia.py',
+    '# archivo: flores_amarillas.py',
     '',
-    'def encontrar_constante(universo):',
-    '    for elemento in universo:',
-    '        if elemento.nombre == "Lisbeth":',
-    '            return elemento',
-    '    raise ValueError("sin_quererte_minimo")',
+    'from datetime import date',
     '',
-    'constante = encontrar_constante(universo)',
-    'print("En este mundo de variables,")',
-    'print(f"{constante} eres mi única constante.")',
+    'def florecer(primavera):',
+    '    return "amarillas" if primavera == "21/09" else "espera"',
+    '',
+    'faltan = (date(2026, 9, 21) - date.today()).days',
+    'print(f"Faltan {faltan} dias para")',
+    'print("el dia de las flores amarillas,")',
+    'print("dia de paz y de primavera...")',
+    'print("y el dia en que mi mundo florece contigo.")',
     '# >>> True',
 ];
 
@@ -343,22 +351,23 @@ function escribirCodigo(contenedor, lineas, finalizar) {
 }
 
 function mostrarSalidaTerminal(contenedor) {
-    contenedor.innerHTML += '<div class="linea-codigo comando">$ python mensaje_del_dia.py</div>';
+    contenedor.innerHTML += '<div class="linea-codigo comando">$ python flores_amarillas.py</div>';
 
     const salida = document.createElement('div');
     salida.className = 'ventana-salida';
     contenedor.appendChild(salida);
 
+    const faltan = diasHasta21Septiembre();
     const lineas = [
-        'Corriendo amor.exe &#128154; metadata...  [OK]',
-        'En este mundo de variables,',
-        '<span class="salida-nombre">Lisbeth</span> eres mi <span class="salida-constante">&uacute;nica constante</span>.'
+        'Sincronizando primavera.exe &#127807;...  [OK]',
+        `Faltan <span class="salida-numero">${faltan}</span> dias para el 21 de septiembre.`,
+        'Dia de las <span class="salida-nombre">Flores Amarillas</span> y de la Paz Mundial...'
     ];
 
     let i = 0;
     function revelar() {
         if (i >= lineas.length) {
-            salida.innerHTML += '<div class="linea-salida final"><span class="cursor-bloque">&#9608;</span></div>';
+            salida.innerHTML += '<div class="linea-salida final"><span class="salida-frase">&#10022; Pero para mi, ese dia florecen tus flores amarillas: tu sonrisa &#10022;</span><span class="cursor-bloque">&#9608;</span></div>';
             return;
         }
         const linea = document.createElement('div');
@@ -377,18 +386,18 @@ function verMensajeDelDia() {
     if (typeof Swal === 'undefined') return;
 
     baseSwal({
-        title: '&#128276; Nuevo mensaje del dia',
+        title: '&#128276; Algo especial se acerca',
         html: `
             <div class="ventana-codigo">
                 <div class="ventana-codigo-barra">
                     <span class="ventana-punto vp-rojo"></span>
                     <span class="ventana-punto vp-ambar"></span>
                     <span class="ventana-punto vp-verde"></span>
-                    <span class="ventana-titulo">mensaje_del_dia.py &mdash; Python 3.12</span>
+                    <span class="ventana-titulo">flores_amarillas.py &mdash; Python 3.12</span>
                 </div>
                 <div class="ventana-codigo-cuerpo" id="cuerpoCodigo"></div>
             </div>
-            <p class="mensaje-frase">&#10022; En este mundo de variables, eres mi &uacute;nica constante &#10022;</p>
+            <p class="mensaje-frase">&#10022; 21 de septiembre: florecen las flores amarillas y el mundo celebra la paz... pero yo solo celebro tenerte a ti &#10022;</p>
         `,
         customClass: { popup: 'swal-futuristic swal-codigo' },
         showClass: { popup: 'animate__animated animate__zoomIn' },
