@@ -5,9 +5,17 @@ function explotarCorazones(x, y) {
         const particula = document.createElement('span');
         particula.className = 'explosion-particle';
 
-        const esHoja = Math.random() > 0.5;
-        particula.innerHTML = esHoja ? '&#127807;' : '&#10084;';
-        particula.style.color = esHoja ? '#6aa06f' : '#e3c896';
+        const valor = Math.random();
+        const esFlor = valor < 0.4;
+        const esCorazon = valor < 0.7;
+        const esPaloma = valor < 0.9;
+        particula.innerHTML = esFlor ? '&#127804;'
+            : esCorazon ? '&#128149;'
+            : esPaloma ? '&#128065;&#65039;'
+            : '&#127799;';
+
+        const colores = ['#f2b705', '#f79cb4', '#6fb3d8', '#d98e04', '#7fae5e'];
+        particula.style.color = colores[Math.floor(Math.random() * colores.length)];
         particula.style.fontSize = (10 + Math.random() * 12) + 'px';
 
         const angulo = (Math.PI * 2 * i) / App.config.CANTIDAD_EXPLOSION + Math.random() * 0.5;

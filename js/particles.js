@@ -14,8 +14,10 @@ function iniciarParticulas() {
         particula.style.setProperty('--delay', Math.random() * 5 + 's');
 
         particula.style.background = Math.random() > 0.5
-            ? 'radial-gradient(circle, rgba(184,147,90,0.4), transparent)'
-            : 'radial-gradient(circle, rgba(74,124,89,0.3), transparent)';
+            ? 'radial-gradient(circle, rgba(242,183,5,0.5), transparent)'
+            : (Math.random() > 0.5
+                ? 'radial-gradient(circle, rgba(111,179,216,0.45), transparent)'
+                : 'radial-gradient(circle, rgba(247,156,180,0.45), transparent)');
 
         App.el.capaParticulas.appendChild(particula);
     }

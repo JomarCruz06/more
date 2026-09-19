@@ -58,7 +58,7 @@ function alternarAudioModal() {
             intentosAudio = 0;
             try { if (reproductorYT.unMute) reproductorYT.unMute(); } catch (e) {}
             reproductorYT.playVideo();
-            subtitulo.innerHTML = 'Nuestra cancion &#127925;';
+            subtitulo.innerHTML = 'Sonando nuestra canción &#127925;';
             reproductorUI.classList.add('playing');
             boton.innerHTML = '&#10074;&#10074;';
             boton.classList.add('playing');
@@ -66,7 +66,7 @@ function alternarAudioModal() {
             intentosAudio++;
             setTimeout(alternarAudioModal, 200);
         } else {
-            mostrarToast('No se pudo cargar la musica', 'warning');
+            mostrarToast('No se pudo cargar la música', 'warning');
         }
     }
 }
@@ -79,7 +79,7 @@ function detenerAudioModal() {
     try { if (reproductorYT && reproductorYT.pauseVideo) reproductorYT.pauseVideo(); } catch (e) {}
     if (reproductorUI) reproductorUI.classList.remove('playing');
     if (boton) { boton.innerHTML = '&#9654;'; boton.classList.remove('playing'); }
-    if (subtitulo) subtitulo.innerHTML = 'Toca para escuchar &#10084;';
+    if (subtitulo) subtitulo.innerHTML = 'Toca para escuchar &#127925;';
 }
 
 function detenerMusica() {

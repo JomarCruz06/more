@@ -36,8 +36,14 @@ function iniciarCursor() {
         requestAnimationFrame(animar);
     })();
 
-    document.querySelectorAll('button, a, .tarjeta-portada, .audio-player, .gallery-item').forEach((elemento) => {
-        elemento.addEventListener('mouseenter', () => App.el.cursorRing.classList.add('hovering'));
-        elemento.addEventListener('mouseleave', () => App.el.cursorRing.classList.remove('hovering'));
+    document.addEventListener('mouseover', (e) => {
+        if (e.target.closest('button, a, [role="button"], .tarjeta-portada, .audio-player, .gallery-item, .carousel-dot, .lightbox-close, .lightbox-nav')) {
+            App.el.cursorRing.classList.add('hovering');
+        }
+    });
+    document.addEventListener('mouseout', (e) => {
+        if (e.target.closest('button, a, [role="button"], .tarjeta-portada, .audio-player, .gallery-item, .carousel-dot, .lightbox-close, .lightbox-nav')) {
+            App.el.cursorRing.classList.remove('hovering');
+        }
     });
 }

@@ -36,14 +36,15 @@ function mostrarBienvenida() {
     }
 
     baseSwal({
-        title: 'Hola mi vida',
+        title: 'Hola, baby',
         html: `
-            <p>Has abierto este pequeño detalle, porque significas mucho para mi.</p>
-            <p>Disfruta cada palabra, cada foto y cada pensamientoque.</p>
-            <p class="bienvenida-firma">&#127807; Con kariño &#127807;</p>
+            <div class="swal-flor-corona">&#127799; &#127820; &#128065;&#65039; &#127820; &#127799;</div>
+            <p>Hoy, 21 de septiembre, es el día de las flores amarillas, de la paz y de la primavera. Y quise aprovecharlo para escribirte algo que te pienso más seguido de lo que te digo.</p>
+            <p>Adentro hay unas fotos, una carta y un audio para que lo escuches cada amanecer. Ojalá te gusten.</p>
+            <p class="bienvenida-firma">&#127799; Tu ñañito &#127799;</p>
         `,
         icon: 'success',
-        iconColor: '#4a7c59',
+        iconColor: '#f2b705',
         confirmText: 'Abrir carta',
         allowOutsideClick: false,
         allowEscapeKey: false,
@@ -70,7 +71,7 @@ function abrirCartaModal() {
             hideClass: { popup: 'animate__animated animate__fadeOut' },
             showConfirmButton: false,
             showCloseButton: true,
-            closeButtonHtml: '<span style="font-size:20px;color:rgba(215,228,201,0.6);line-height:1;">&times;</span>',
+            closeButtonHtml: '<span style="font-size:20px;color:rgba(91,70,54,0.6);line-height:1;">&times;</span>',
             allowOutsideClick: false,
             allowEscapeKey: false,
             didOpen: () => {
@@ -96,8 +97,8 @@ function construirHTMLCarta() {
 
         <div class="letter-topbar">
             <span class="topbar-punto"></span>
-            <span>PENSAMIENTOS CIFRADAOS · v3.0</span>
-            <span class="topbar-estado">VINCULO SEGURO</span>
+            <span>21 DE SEPTIEMBRE · AMOR, PAZ Y PRIMAVERA</span>
+            <span class="topbar-estado">CARTA ABIERTA</span>
         </div>
 
         <div class="tech-corners" aria-hidden="true">
@@ -110,17 +111,19 @@ function construirHTMLCarta() {
         <div class="letter-header">
             <div class="letter-header-icon">
                 <span></span>
-                <span style="color:#6aa06f;font-size:18px;">&#127807;</span>
+                <span style="color:#f2b705;font-size:18px;">&#127803;</span>
                 <span></span>
             </div>
             <h1>Para ti, mi niña bonita</h1>
-            <p>&#10022; Para mi persona favorita &#10022;</p>
+            <p>&#10022; 21 de septiembre · Día de la Paz, la Primavera y el Amor &#10022;</p>
         </div>
+
+        <div class="divisor-floral"><span class="div-racha">&#127799; &#127820; &#128065;&#65039; &#127820; &#127799;</span></div>
 
         <div class="letter-counter">
             <div class="counter-item">
                 <span class="counter-num" id="m-c-dias">--</span>
-                <span class="counter-label">Dias</span>
+                <span class="counter-label">Días</span>
             </div>
             <div class="counter-item">
                 <span class="counter-num" id="m-c-horas">--</span>
@@ -137,51 +140,53 @@ function construirHTMLCarta() {
         </div>
 
         <div class="letter-gallery">
-            <div class="carousel-wrapper">
-                <div class="carousel-track" id="pistaCarrusel">
+            <div class="carousel-wrapper" role="region" aria-label="Galería de recuerdos">
+                <div class="carousel-track" id="pistaCarrusel" aria-live="polite">
                     <div class="carousel-slide">
-                        <div class="gallery-item" onclick="abrirLightbox('oto/mor.jpeg','Los dos juntos, siempre')">
+                        <div class="gallery-item" onclick="abrirLightbox('oto/mor.jpeg','Juntos')">
                             <img src="oto/mor.jpeg" alt="Foto juntos" loading="lazy">
                             <div class="gallery-item-overlay">
-                                <span class="gallery-item-caption">Los dos juntos, siempre</span>
+                                <span class="gallery-item-caption">Juntos</span>
                             </div>
                             <div class="gallery-item-zoom">&#128269;</div>
                         </div>
                     </div>
                     <div class="carousel-slide">
-                        <div class="gallery-item" onclick="abrirLightbox('oto/more.jpeg','Un momento que atesoro')">
+                        <div class="gallery-item" onclick="abrirLightbox('oto/more.jpeg','Un momento contigo')">
                             <img src="oto/more.jpeg" alt="Momento especial" loading="lazy">
                             <div class="gallery-item-overlay">
-                                <span class="gallery-item-caption">Un momento que atesoro</span>
+                                <span class="gallery-item-caption">Un momento contigo</span>
                             </div>
                             <div class="gallery-item-zoom">&#128269;</div>
                         </div>
                     </div>
                     <div class="carousel-slide">
-                        <div class="gallery-item" onclick="abrirLightbox('oto/m.jpeg','Contigo cada dia')">
+                        <div class="gallery-item" onclick="abrirLightbox('oto/m.jpeg','De esos días')">
                             <img src="oto/m.jpeg" alt="Contigo cada dia" loading="lazy">
                             <div class="gallery-item-overlay">
-                                <span class="gallery-item-caption">Contigo cada dia</span>
+                                <span class="gallery-item-caption">De esos días</span>
                             </div>
                             <div class="gallery-item-zoom">&#128269;</div>
                         </div>
                     </div>
                 </div>
-                <button class="carousel-btn carousel-btn-prev" onclick="carruselAnterior()">&#10094;</button>
-                <button class="carousel-btn carousel-btn-next" onclick="carruselSiguiente()">&#10095;</button>
+                <button class="carousel-btn carousel-btn-prev" type="button" aria-label="Anterior" onclick="carruselAnterior()">&#10094;</button>
+                <button class="carousel-btn carousel-btn-next" type="button" aria-label="Siguiente" onclick="carruselSiguiente()">&#10095;</button>
                 <div class="carousel-dots" id="puntosCarrusel">
-                    <div class="carousel-dot active" data-slide="0" onclick="carruselIrA(0)"></div>
-                    <div class="carousel-dot" data-slide="1" onclick="carruselIrA(1)"></div>
-                    <div class="carousel-dot" data-slide="2" onclick="carruselIrA(2)"></div>
+                    <div class="carousel-dot active" data-slide="0" role="button" tabindex="0" aria-label="Foto 1" onclick="carruselIrA(0)"></div>
+                    <div class="carousel-dot" data-slide="1" role="button" tabindex="0" aria-label="Foto 2" onclick="carruselIrA(1)"></div>
+                    <div class="carousel-dot" data-slide="2" role="button" tabindex="0" aria-label="Foto 3" onclick="carruselIrA(2)"></div>
                 </div>
             </div>
         </div>
+
+        <div class="divisor-floral"><span class="div-racha">&#127804; &#128149; &#127799; &#128149; &#127804;</span></div>
 
         <div class="letter-audio">
             <div class="audio-player" id="reproductorModal" onclick="alternarAudioModal()">
                 <div class="audio-btn" id="botonAudio">&#9654;</div>
                 <div class="audio-info">
-                    <div class="audio-title">Nuestra cancion</div>
+                    <div class="audio-title">Nuestra canción</div>
                     <div class="audio-sub" id="subtituloAudio">Toca para escuchar &#10084;</div>
                 </div>
                 <div class="audio-bars">
@@ -196,27 +201,23 @@ function construirHTMLCarta() {
         </div>
 
         <div class="letter-body">
-            <p>Quise escribirte algo que puedas leer cada vez que necesites un recordatorio de lo increible que eres y de todo lo que significas para mi.</p>
+            <p>Ya es 21 de septiembre, el día de las flores amarillas, de la paz y de la primavera. Y quise aprovechar la fecha para escribirte, aunque lo cierto es que no necesito que llegue un día especial para acordarme de ti.</p>
 
-            <p>Se que los dias no siempre son faciles. Las materias se acumulan, los trabajos pesan, los parciales estresan y a veces el cansancio habla mas fuerte que las ganas. Pero quiero que sepas que en esos momentos dificiles, yo estoy ahi, aunque no siempre pueda estarlo en persona. Cada mensaje tuyo, cada foto de tus apuntes, cada llamada en la que me cuentas como te fue, son mis pequenos recordatorios de que estas construyendo algo increible, paso a paso.</p>
+            <p>Estás en el segundo ciclo de ingeniería ambiental y no sabes lo orgulloso que me pongo cuando lo pienso. Esa carrera no se elige por moda, se elige porque de verdad te importa algo grande. Y verte así, seria y constante, con esa calma tan tuya, cuidando el planeta, me parece admirable.</p>
 
-            <p>Admiro tu dedicacion, Lisbeth mi nina bonita. Estudiar ingenieria ambiental no es cualquier cosa: es elegir cada dia contribuir a un mundo mejor, cuidar lo que otros descuidan, pensar en el futuro cuando todos viven en el presente. Y tu lo haces con una entrega que me deja sin palabras. Eres valiente, inteligente y mas fuerte de lo que crees, y quiero que nunca lo olvides.</p>
+            <p>Yo estudio sistemas y de tu mundo aprendo cada vez que me cuentas algo. No sé si sabré ayudarte en todo, pero sí te prometo intentarlo de verdad. Si un parcial te queda grande o una práctica no te sale, escríbeme: nada me gusta más que poder servirte de apoyo cuando me necesitas.</p>
 
-            <p>Y aunque yo este del otro lado con mi ingenieria de sistemas, mis ecuaciones y mis lineas de codigo, siempre encuentro un espacio en mi dia para pensar en ti. Porque tu eres mi programa mas importante, mi variable constante, mi ecuacion favorita que nunca termino de resolver pero que siempre me da la respuesta correcta: tu.</p>
+            <p>Y no quiero que mi cariño se note solo cuando hay una fecha bonita por el medio. Hoy se celebra el día de las flores amarillas, y espero que lo mío se te note todos los días: cuando te va bien, cuando te va mal y cuando me escribes para contarme cómo te fue.</p>
 
-            <p>Quiero que sepas que confio en ti, en todo lo que eres y en todo lo que vas a lograr. Cuando dudes de ti misma, recuerda que hay alguien que te ve con admiracion, que se siente orgulloso de cada avance tuyo, por pequeno que parezca. No estas sola en esto; yo voy a estar en las buenas y en las malas, celebrando cada logro y sosteniendote cuando haga falta.</p>
-
-            <p>Sigue adelante con esa fuerza que te caracteriza. Sigue cuidando del planeta como solo tu sabes hacerlo. Sigue siendo esa mujer increible que me roba una sonrisa cada dia. Y cuando el mundo se sienta pesado, vuelve a leer esto y recuerda: alguien te quiere con todo lo que tiene.</p>
-
-            <p>Te quiero hoy, manana y todos los dias que me quedan. Tuyo, siempre.</p>
+            <p>Te tengo muchísimo cariño y cada día me gusta más lo que voy conociendo de ti. Sigue así de enfocada: tu esfuerzo se nota, y estoy seguro de que tu segundo ciclo te va a ir muy bien. Cuenta conmigo, siempre.</p>
         </div>
 
         <div class="letter-signature">
-            <div class="letter-signature-text">Tuyo, con todo mi corazon</div>
+            <div class="letter-signature-text"><span class="firma-flor">&#127820;</span> Con cariño, tu ñañito</div>
         </div>
 
         <div class="letter-seal">
-            <div class="seal">&#127807;</div>
+            <div class="seal">&#127804;</div>
         </div>
 
     </div>
@@ -227,19 +228,66 @@ function construirHTMLCarta() {
 let diapositivaActual = 0;
 const totalDiapositivas = 3;
 let temporizadorCarrusel = null;
+let pausaCarrusel = false;
+let arrastreInicioX = null;
+
+function reiniciarTemporizadorCarrusel() {
+    clearInterval(temporizadorCarrusel);
+    if (pausaCarrusel) return;
+    temporizadorCarrusel = setInterval(() => carruselSiguiente(), App.config.INTERVALO_CARRUSEL);
+}
 
 function configurarCarrusel() {
     diapositivaActual = 0;
     actualizarCarrusel();
-    clearInterval(temporizadorCarrusel);
-    temporizadorCarrusel = setInterval(() => carruselSiguiente(), App.config.INTERVALO_CARRUSEL);
+    pausaCarrusel = false;
+    reiniciarTemporizadorCarrusel();
+
+    const envoltorio = document.querySelector('.carousel-wrapper');
+    if (!envoltorio || envoltorio.dataset.carruselListo) return;
+    envoltorio.dataset.carruselListo = '1';
+
+    envoltorio.addEventListener('mouseenter', () => {
+        pausaCarrusel = true;
+        reiniciarTemporizadorCarrusel();
+    });
+    envoltorio.addEventListener('mouseleave', () => {
+        pausaCarrusel = false;
+        reiniciarTemporizadorCarrusel();
+    });
+
+    envoltorio.addEventListener('touchstart', (e) => {
+        arrastreInicioX = e.touches[0].clientX;
+        pausaCarrusel = true;
+        reiniciarTemporizadorCarrusel();
+    }, { passive: true });
+
+    envoltorio.addEventListener('touchend', (e) => {
+        if (arrastreInicioX === null) return;
+        const delta = e.changedTouches[0].clientX - arrastreInicioX;
+        arrastreInicioX = null;
+        if (Math.abs(delta) > 40) {
+            if (delta < 0) carruselSiguiente();
+            else carruselAnterior();
+        }
+        pausaCarrusel = false;
+        reiniciarTemporizadorCarrusel();
+    }, { passive: true });
+
+    document.querySelectorAll('#puntosCarrusel .carousel-dot').forEach((punto) => {
+        punto.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                punto.click();
+            }
+        });
+    });
 }
 
 function carruselIrA(n) {
     diapositivaActual = ((n % totalDiapositivas) + totalDiapositivas) % totalDiapositivas;
     actualizarCarrusel();
-    clearInterval(temporizadorCarrusel);
-    temporizadorCarrusel = setInterval(() => carruselSiguiente(), App.config.INTERVALO_CARRUSEL);
+    reiniciarTemporizadorCarrusel();
 }
 
 function carruselSiguiente() {
@@ -259,26 +307,23 @@ function actualizarCarrusel() {
 }
 
 /* ---- MENSAJE DEL DIA EN PYTHON ---- */
-function diasHasta21Septiembre() {
-    const hoy = new Date();
-    let objetivo = new Date(hoy.getFullYear(), 8, 21);
-    if (objetivo < hoy) objetivo = new Date(hoy.getFullYear() + 1, 8, 21);
-    return Math.ceil((objetivo - hoy) / (1000 * 60 * 60 * 24));
-}
-
 const MENSAJE_PY = [
     '# archivo: flores_amarillas.py',
     '',
     'from datetime import date',
     '',
-    'def florecer(primavera):',
-    '    return "amarillas" if primavera == "21/09" else "espera"',
+    'def florecer(hoy):',
+    '    return "si" if hoy == date(2026, 9, 21) else "no"',
     '',
-    'faltan = (date(2026, 9, 21) - date.today()).days',
-    'print(f"Faltan {faltan} dias para")',
-    'print("el dia de las flores amarillas,")',
-    'print("dia de paz y de primavera...")',
-    'print("y el dia en que mi mundo florece contigo.")',
+    'hoy = date.today()',
+    'if florecer(hoy) == "si":',
+    '    print("Hoy es el dia de las")',
+    '    print("Flores Amarillas, la Paz")',
+    '    print("y la Primavera.")',
+    '    print("Tu segundo ciclo te va")',
+    '    print("a ir de maravilla.")',
+    '    print("Y aqui estoy, por si")',
+    '    print("en algo puedo ayudar.")',
     '# >>> True',
 ];
 
@@ -357,17 +402,17 @@ function mostrarSalidaTerminal(contenedor) {
     salida.className = 'ventana-salida';
     contenedor.appendChild(salida);
 
-    const faltan = diasHasta21Septiembre();
     const lineas = [
-        'Sincronizando primavera.exe &#127807;...  [OK]',
-        `Faltan <span class="salida-numero">${faltan}</span> dias para el 21 de septiembre.`,
-        'Dia de las <span class="salida-nombre">Flores Amarillas</span> y de la Paz Mundial...'
+        'Cargando flores_amarillas.py &#127803;...  [OK]',
+        '<span class="salida-nombre">Hoy</span> es <span class="salida-numero">21 de septiembre</span>.',
+        'Dia de las <span class="salida-nombre">Flores Amarillas</span>, la Paz y la Primavera.',
+        'Sincronizando con Lisbeth... [OK]'
     ];
 
     let i = 0;
     function revelar() {
         if (i >= lineas.length) {
-            salida.innerHTML += '<div class="linea-salida final"><span class="salida-frase">&#10022; Pero para mi, ese dia florecen tus flores amarillas: tu sonrisa &#10022;</span><span class="cursor-bloque">&#9608;</span></div>';
+            salida.innerHTML += '<div class="linea-salida final"><span class="salida-frase">&#10022; Hoy, como todos los días: cuentas conmigo &#10022;</span><span class="cursor-bloque">&#9608;</span></div>';
             return;
         }
         const linea = document.createElement('div');
@@ -386,8 +431,9 @@ function verMensajeDelDia() {
     if (typeof Swal === 'undefined') return;
 
     baseSwal({
-        title: '&#128276; Algo especial se acerca',
+        title: '&#128276; Mensaje del día',
         html: `
+            <div class="swal-flor-corona">&#127804; &#127799; &#128149; &#127799; &#127804;</div>
             <div class="ventana-codigo">
                 <div class="ventana-codigo-barra">
                     <span class="ventana-punto vp-rojo"></span>
@@ -397,14 +443,14 @@ function verMensajeDelDia() {
                 </div>
                 <div class="ventana-codigo-cuerpo" id="cuerpoCodigo"></div>
             </div>
-            <p class="mensaje-frase">&#10022; 21 de septiembre: florecen las flores amarillas y el mundo celebra la paz... pero yo solo celebro tenerte a ti &#10022;</p>
+            <p class="mensaje-frase">&#10022; 21 de septiembre: flores amarillas, paz y primavera. Y tú, siempre, con todo mi apoyo &#10022;</p>
         `,
         customClass: { popup: 'swal-futuristic swal-codigo' },
         showClass: { popup: 'animate__animated animate__zoomIn' },
         hideClass: { popup: 'animate__animated animate__zoomOut' },
         showConfirmButton: false,
         showCloseButton: true,
-        closeButtonHtml: '<span style="font-size:20px;color:rgba(215,228,201,0.6);line-height:1;">&times;</span>',
+        closeButtonHtml: '<span style="font-size:20px;color:rgba(91,70,54,0.6);line-height:1;">&times;</span>',
         allowOutsideClick: true,
         didOpen: () => {
             const cuerpo = document.getElementById('cuerpoCodigo');
@@ -434,13 +480,13 @@ function confirmarCerrarCarta() {
     }
 
     baseSwal({
-        title: 'Volver a la portada?',
-        html: '<p style="margin:8px 0 0;">Podras leer este detalle de nuevo cuantas veces.</p>',
+        title: '¿Volver a la portada?',
+        html: '<div class="swal-flor-corona">&#127799; &#127820; &#128149; &#127820; &#127799;</div><p style="margin:8px 0 0;">Puedes volver cuando quieras.</p>',
         icon: 'question',
-        iconColor: '#b8935a',
+        iconColor: '#f2b705',
         showCancelButton: true,
-        confirmText: 'Si, volver',
-        cancelText: 'Quedarme aqui',
+        confirmText: 'Sí, volver',
+        cancelText: 'Seguir leyendo',
         customClass: { popup: 'swal-futuristic swal-confirm' },
         allowOutsideClick: false,
         allowEscapeKey: false,

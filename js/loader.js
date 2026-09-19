@@ -1,9 +1,9 @@
 const PASOS_INICIO = [
-    '&gt; inicializando nucleo neuronal...',
-    '&gt; cargando memorias compartidas...',
-    '&gt; cifrando recuerdos con carino...',
-    '&gt; sincronizando latidos...',
-    '&gt; vinculo establecido [OK]'
+    '&gt; preparando tu detalle...',
+    '&gt; alistando flores amarillas...',
+    '&gt; escribiendo algo para ti...',
+    '&gt; ordenando las fotos...',
+    '&gt; listo para que lo veas [OK]'
 ];
 
 function iniciarLoader() {
@@ -33,7 +33,7 @@ function iniciarLoader() {
             clearInterval(secuencia);
             if (barra) barra.style.width = '100%';
             if (porcentaje) porcentaje.textContent = '100%';
-            if (lineaLog) lineaLog.innerHTML = '&gt; sistema listo — abriendo este detalle';
+            if (lineaLog) lineaLog.innerHTML = '&gt; listo — feliz 21 de septiembre';
             setTimeout(() => {
                 App.el.loader.classList.add('apagado');
             }, 400);

@@ -1,9 +1,9 @@
 const ESTADOS_SISTEMA = [
-    '&gt; modulo afecto: 100% activo',
-    '&gt; recuerdos optimizados con Sunqu',
-    '&gt; sostenibilidad emocional: ALTA',
-    '&gt; vinculo seguro · cifrado con amor',
-    '&gt; listo para tocar'
+    '&gt; modo paz: activado',
+    '&gt; flores amarillas: listas',
+    '&gt; pensando en ti...',
+    '&gt; todo listo por aquí',
+    '&gt; ábrelo cuando quieras'
 ];
 
 function iniciarEfectos() {
@@ -30,11 +30,10 @@ function iniciarEscrituraAutomatica() {
     if (!App.prefs.movimientoReducido && window.Typed) {
         new Typed(App.el.textoTipo, {
             strings: [
-                'Mi ingeniera ambiental &#127807;',
-                'Cuidando del planeta y de mi &#128154;',
-                'Mi fuerza, mi calma &#10024;',
-                'Siempre juntos &#128149;',
-                'Tu y yo, el equipo perfecto &#128640;'
+                'Mi ingeniera favorita &#127807;',
+                'Hoy es el día de las flores &#127799;',
+                'Tu segundo ciclo te va bien &#127804;',
+                'Cuenta conmigo, siempre &#128149;'
             ],
             typeSpeed: 45,
             backSpeed: 20,
@@ -44,7 +43,7 @@ function iniciarEscrituraAutomatica() {
             showCursor: false
         });
     } else {
-        App.el.textoTipo.textContent = 'Mi ingeniera ambiental';
+        App.el.textoTipo.textContent = 'Mi ingeniera favorita';
     }
 }
 
